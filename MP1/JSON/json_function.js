@@ -20,7 +20,7 @@ $(document).ready(function(){
 
 function start(something) {
     obj = something.sales;
-    // window.localStorage.clear();
+    window.localStorage.clear();
     var prev = JSON.parse(window.localStorage.getItem("data"));
     if(prev != undefined) {
         obj = prev;
@@ -195,36 +195,16 @@ function loadAllSalesByDate(input) {
         }
 
         refresh();
-        var a = function() {
-            return arr[0][0] + arr[1][0] + arr[2][0] + arr[3][0] + arr[4][0] + arr[5][0] + arr[6][0];
-        }
-        var b = function() {
-            return arr[0][2] + arr[1][2] + arr[2][2] + arr[3][2] + arr[4][2] + arr[5][2] + arr[6][2];
-        }
-        var c = function() {
-            return arr[0][1] + arr[1][1] + arr[2][1] + arr[3][1] + arr[4][1] + arr[5][1] + arr[6][1];
-        }
-        var d = function() {
-            return arr[3][0] + arr[3][1] + arr[3][2];
-        }
-        var e = function() {
-            return arr[4][0] + arr[4][1] + arr[4][2];
-        }
-        var f = function() {
-            return arr[6][0] + arr[6][1] + arr[6][2];
-        }
-        var g = function() {
-            return arr[0][0] + arr[0][1] + arr[0][2];
-        }
-        var h = function() {
-            return arr[1][0] + arr[1][1] + arr[1][2];
-        }
-        var i = function() {
-            return arr[2][0] + arr[2][1] + arr[2][2];
-        }
-        var j = function() {
-            return arr[5][0] + arr[5][1] + arr[5][2];
-        }
+        var a = arr[0][0] + arr[1][0] + arr[2][0] + arr[3][0] + arr[4][0] + arr[5][0] + arr[6][0];
+        var b = arr[0][2] + arr[1][2] + arr[2][2] + arr[3][2] + arr[4][2] + arr[5][2] + arr[6][2];
+        var c = arr[0][1] + arr[1][1] + arr[2][1] + arr[3][1] + arr[4][1] + arr[5][1] + arr[6][1];
+        var d = arr[3][0] + arr[3][1] + arr[3][2];
+        var e = arr[4][0] + arr[4][1] + arr[4][2];
+        var f = arr[6][0] + arr[6][1] + arr[6][2];
+        var g = arr[0][0] + arr[0][1] + arr[0][2];
+        var h = arr[1][0] + arr[1][1] + arr[1][2];
+        var i = arr[2][0] + arr[2][1] + arr[2][2];
+        var j = arr[5][0] + arr[5][1] + arr[5][2];
         showCount(a, b, c, d, e, f, g, h, i, j);
         updateSalesByDate("Burger Sales in " + month_list[bb - 1] + " " + cc + ", " + aa, customerList.length, objects);        
     }
@@ -255,36 +235,16 @@ function loadAllSales() {
         objects.push(generateObjects(customerList[m], arr[m], color[m]));
     }
     refresh();
-    var a = function() {
-        return arr[0][0] + arr[1][0] + arr[2][0] + arr[3][0] + arr[4][0] + arr[5][0] + arr[6][0];
-    }
-    var b = function() {
-        return arr[0][2] + arr[1][2] + arr[2][2] + arr[3][2] + arr[4][2] + arr[5][2] + arr[6][2];
-    }
-    var c = function() {
-        return arr[0][1] + arr[1][1] + arr[2][1] + arr[3][1] + arr[4][1] + arr[5][1] + arr[6][1];
-    }
-    var d = function() {
-        return arr[3][0] + arr[3][1] + arr[3][2];
-    }
-    var e = function() {
-        return arr[4][0] + arr[4][1] + arr[4][2];
-    }
-    var f = function() {
-        return arr[6][0] + arr[6][1] + arr[6][2];
-    }
-    var g = function() {
-        return arr[0][0] + arr[0][1] + arr[0][2];
-    }
-    var h = function() {
-        return arr[1][0] + arr[1][1] + arr[1][2];
-    }
-    var i = function() {
-        return arr[2][0] + arr[2][1] + arr[2][2];
-    }
-    var j = function() {
-        return arr[5][0] + arr[5][1] + arr[5][2];
-    }
+    var a = arr[0][0] + arr[1][0] + arr[2][0] + arr[3][0] + arr[4][0] + arr[5][0] + arr[6][0];
+        var b = arr[0][2] + arr[1][2] + arr[2][2] + arr[3][2] + arr[4][2] + arr[5][2] + arr[6][2];
+        var c = arr[0][1] + arr[1][1] + arr[2][1] + arr[3][1] + arr[4][1] + arr[5][1] + arr[6][1];
+        var d = arr[3][0] + arr[3][1] + arr[3][2];
+        var e = arr[4][0] + arr[4][1] + arr[4][2];
+        var f = arr[6][0] + arr[6][1] + arr[6][2];
+        var g = arr[0][0] + arr[0][1] + arr[0][2];
+        var h = arr[1][0] + arr[1][1] + arr[1][2];
+        var i = arr[2][0] + arr[2][1] + arr[2][2];
+        var j = arr[5][0] + arr[5][1] + arr[5][2];
     showCount(a, b, c, d, e, f, g, h, i, j);
     updateSalesByDate("Burger Sales" , customerList.length, objects);
 }
