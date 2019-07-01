@@ -20,7 +20,7 @@ $(document).ready(function(){
 
 function start(something) {
     obj = something.sales;
-    window.localStorage.clear();
+    // window.localStorage.clear();
     var prev = JSON.parse(window.localStorage.getItem("data"));
     if(prev != undefined) {
         obj = prev;
