@@ -1,0 +1,52 @@
+[
+		{
+			"datetime": "2019-09-17 08:02:58", 
+			"burger" : "Krusty Deluxe", 
+			"species" : "leatherback turtle"
+		}, 
+		{
+			"datetime": "2019-05-15 08:10:58", 
+			"burger" : "Krusty Deluxe", 
+			"species" : "gray whale"
+		}, 
+		{
+			"datetime": "2019-03-15 09:02:58", 
+			"burger" : "Krusty Combo", 
+			"species" : "salmon"
+		}, 
+		{
+			"datetime": "2019-07-14 08:12:58", 
+			"burger" : "Krabby Pattie", 
+			"species" : "sea lion"
+		}, 
+		{
+			"datetime": "2019-07-16 08:02:58", 
+			"burger" : "Krusty Deluxe", 
+			"species" : "giant clam"
+		}, 
+		{
+			"datetime": "2019-10-04 05:07:28", 
+			"burger" : "Krusty Deluxe", 
+			"species" : "leatherback turtle"
+		}, 
+		{
+			"datetime": "2019-09-10 04:42:58", 
+			"burger" : "Krusty Combo", 
+			"species" : "salmon"
+		}, 
+		{
+			"datetime": "2019-12-17 09:06:58", 
+			"burger" : "Krabby Pattie", 
+			"species" : "giant clam"
+		}, 
+		{
+			"datetime": "2019-12-25 08:30:58", 
+			"burger" : "Krusty Combo", 
+			"species" : "coral"
+		}, 
+		{
+			"datetime": "2019-01-01 03:04:18", 
+			"burger" : "Krabby Pattie", 
+			"species" : "seahorse"
+		}
+]

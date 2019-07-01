@@ -1,0 +1,376 @@
+/*
+#7289da	(114,137,218)
+#424549	(66,69,73)
+#36393e	(54,57,62)
+#282b30	(40,43,48)
+#1e2124	(30,33,36)
+*/
+
+html{
+    background: #282B30;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+.flex-square {
+    width: 100%;
+    height: 100%;
+    background: #282B30;
+    position: absolute;
+}
+
+.flex-square:before {
+    content: "";
+    display: block;
+}
+
+.HomeTop {
+    height: 100px;
+    width: 100px;
+    top: 0px;
+    background-color: #1E2124;
+    margin-left: 50%;
+    transform: translate(-50%);
+    margin-bottom: 20px;
+    padding: 0px;
+    border: none;
+    position: absolute;
+    display: flex;
+
+}
+
+#Logo {
+    width: 70%;
+    height: 60%;
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.SideBar {
+    max-width: 10%;
+    width: 10%;
+    height: 100%;
+    background: #1E2124;
+    position: fixed;
+}
+
+.SideBar:before {
+    content: "";
+    display: block;
+}
+
+.lineUp {
+    height: 5px;
+    width: 80%;
+    top: 110px;
+    left: 10%;
+    border-radius: 25px;
+    background-color: 7289DA;
+    position: absolute;
+    display: inline;
+}
+
+.lineDown {
+    height: 5px;
+    width: 80%;
+    top: 90%;
+    left: 10%;
+    border-radius: 25px;
+    background-color: 7289DA;
+    position: absolute;
+    display: inline;
+}
+
+.ButtonList {
+    list-style: none;
+    height: 70%;
+    width: 100%;
+    position: absolute;
+    top: 130px;
+    padding: 0px;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    display: flex;
+}
+
+.Home {
+    height: 75px;
+    width: 75px;
+    background-color: #36393E;
+    border-radius: 50%;
+    margin-left: 50%;
+    transform: translate(-50%);
+    margin-bottom: 20px;
+    padding: 0px;
+    border: none;
+
+}
+
+.home:hover {
+    background-color: #424549;
+}
+
+.BottomSet {
+    list-style: none;
+    height: 520px;
+    width: 100%;
+    position: absolute;
+    top: 91%;
+    padding: 0px;
+    margin: 0px;
+    flex-direction: row;
+    justify-content: center;
+    display: flex;
+}
+
+.BottomButton {
+    height: 50px;
+    width: 50px;
+    background-color: #36393E;
+    border-radius: 50%;
+    transform: translate(-50%);
+    left: 50%;
+    top: 10px;
+    align-content: center;
+    padding: 0px;
+    border: none;
+    position: absolute;
+    display: inline;
+}
+
+.BottomButton:hover {
+    background-color: #424549;
+}
+
+.ButtonSelect {
+    list-style: none;
+    height: 520px;
+    width: 100px;
+    position: absolute;
+    top: 170px;
+    padding: 0px;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.Select1::before {
+    display: none;
+    height: 40px;
+    width: 5px;
+    background-color: rgb(160, 160, 160);
+    border-radius: 0px 25px 25px 0px;
+    margin-bottom: 20px;
+}
+
+.Home:hover,
+.Select1::after {
+    display: block;
+
+}
+
+
+#HomeButton {
+    justify-content: center;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    display: flex;
+}
+
+.FoodList {
+    list-style: none;
+    height: auto;
+    width: 90%;
+    left: 10%;
+    position: relative;
+    padding: 0px;
+    margin: 0%;
+    top: 45%;
+    transform: translate(0%,-80%);
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    display: flex;
+}
+
+.FoodList:before {
+    content: "";
+    display: block;
+}
+
+#KrabbyPattie {
+    height: auto;
+    width: 350px;
+    bottom: 0px;
+    background-color: #36393e;
+    border-radius: 15px;
+    position: flex;
+    padding: 20px;
+    display: inline;
+    margin: 15px;
+
+}
+
+#KP {
+    height: 150px;
+    width: auto;
+    position: relative;
+    top: 0px;
+    left: 50%;
+    transform: translate(-50%);
+    align-content: center;
+    justify-content: center;
+    display: flex;
+    
+    
+
+}
+
+#KPTitle {
+    color: white;
+    font-family: "Whitney";
+    position: relative;
+
+}
+
+#KPText {
+    color: white;
+    font-family: "Whitney";
+    position: relative;
+    display: inline-flex;
+    top: 0px;
+}
+
+#Logout{
+    height: 25px;
+    width: 25px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    position: absolute;
+}
+
+#KK{
+    height: auto;
+    width: 50%;
+    border-radius: 10px;
+    position: relative; 
+    display: inline;
+    flex-direction: row;
+}
+
+#KKmain{
+    padding: 0px 20px 0px 20px;
+}
+
+#KKText {
+    position: flex; 
+    display: inline;
+    flex-direction: row;
+    color: white;
+    font-family: "Whitney";
+}
+
+#KKTitle{
+    color: white;
+    font-family: "Whitney";
+    font-size: 22px;
+    font-weight: 600;
+}
+
+#krustyKrab{
+    height: 20%;
+    width: 650px;
+    bottom: 0px;
+    /* left: 50%;
+    transform: translate(-50%); */
+    background-color: #36393e;
+    border-radius: 15px;
+    position: relative;
+    padding: 20px;
+    display: flex;
+    margin: 15px;
+}
+
+#KKBack{
+    list-style: none;
+    height: auto;
+    width: 90%;
+    left: 39%;
+    position: relative;
+    padding: 15px;
+    margin: 0%;
+    top: 30%;
+    transform: translate(-35%,-70%);
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    display: flex;
+}
+
+#KKBack:before {
+    content: "";
+    display: block;
+}
+
+#krustykrab:before {
+    content: "";
+    display: block;
+}
+
+@media all and (max-width:850px){
+    .SideBar{
+        display: block;
+        width: 20%;
+        height: 100%;
+    }
+
+    .FoodList{
+        width: 80%;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+        top: 0%;
+        transform: translate(0,-0%)
+    }
+    
+    #KrabbyPattie{
+        width: 100%;
+        height: 300px;
+    }
+
+    .HomeTop, .home{
+        width: 90%;
+        height: auto;
+        padding-top: 90%;
+        top: 2%;
+    }
+
+    .BottomButton{
+        width: 60%;
+        height: auto;
+        padding-top: 60%;
+    }
+
+}
+
+@media all and (min-width:1000px){
+    .SideBar{
+        width: 100px;
+    }
+
+    .FoodList{
+        left: 5%;
+        width: 95%;
+    }
+}

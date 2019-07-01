@@ -1,0 +1,345 @@
+/* =============================================================================
+   HTML5 CSS Reset Minified - Eric Meyer
+   ========================================================================== */
+
+html,
+body,
+div,
+span,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+abbr,
+address,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+samp,
+small,
+strong,
+sub,
+sup,
+var,
+b,
+i,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent
+}
+
+body {
+  line-height: 1
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block
+}
+
+nav ul {
+  list-style: none
+}
+
+blockquote,
+q {
+  quotes: none
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: none
+}
+
+a {
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+  text-decoration: none
+}
+
+mark {
+  background-color: #ff9;
+  color: #000;
+  font-style: italic;
+  font-weight: bold
+}
+
+del {
+  text-decoration: line-through
+}
+
+abbr[title],
+dfn[title] {
+  border-bottom: 1px dotted;
+  cursor: help
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0
+}
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0
+}
+
+input,
+select {
+  vertical-align: middle
+}
+
+li {
+  list-style: none
+}
+
+
+/* =============================================================================
+   My CSS
+   ========================================================================== */
+
+/* ---- base ---- */
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  background: #111;
+}
+
+html {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+body {
+  font: normal 75% Arial, Helvetica, sans-serif;
+}
+
+canvas {
+  display: block;
+  vertical-align: bottom;
+}
+
+
+/* ---- particles.js container ---- */
+
+#particles-js {
+  width: 100%;
+  height: 100%;
+  background-color: #1e2124;
+  background-image: url('');
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+
+.flex-square {
+  padding: 40px;
+  width: 400px;
+  height: 340px;
+  background: #36393f;
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, .2);
+}
+
+.flex-square:before {
+  content: "";
+  display: block;
+}
+
+.LoginInfo {}
+
+#Username {
+  width: 380px;
+  height: 20px;
+  padding: 10px;
+  background-color: #1e2124;
+  border-color: rgba(0, 0, 0, .3);
+  border-width: 1px;
+  border-radius: 5px;
+  color: whitesmoke;
+  top: 50%;
+  left: 50px;
+  align-content: center;
+  font-family: "Whitney";
+  font-size: 16px;
+}
+
+#Password {
+  width: 380px;
+  height: 20px;
+  padding: 10px;
+  background-color: #1e2124;
+  border-color: rgba(0, 0, 0, .3);
+  border-width: 1px;
+  border-radius: 5px;
+  color: whitesmoke;
+  top: 50%;
+  left: 50px;
+  align-content: center;
+  font-family: "Whitney";
+  font-size: 16px;
+}
+
+#EmailText {
+  color: #B9BBBE;
+  font-family: "Whitney";
+  letter-spacing: .5px;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+#PasswordText {
+  color: #B9BBBE;
+  font-family: "Whitney";
+  letter-spacing: .5px;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.LoginSubmit {
+  background: #7289da;
+  border: #7289da;
+  width: 401px;
+  height: 40px;
+  border-radius: 5px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.LoginSubmit:hover {
+  background-color: #7c92e4;
+}
+
+#LoginText {
+  color: white;
+  font-family: "Whitney";
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.Register {
+  background: #1e2124;
+  border-color: #7289da;
+  border-width: 2px;
+  width: 368px;
+  height: 20px;
+  border-radius: 5px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding: 10px 16px;
+  border-style: solid;
+}
+
+.Register:hover {
+  background-color: #292c30;
+
+}
+
+#RegisterText {
+  color: white;
+  font-family: "Whitney";
+  font-weight: 500;
+  font-size: 16px;
+}
+
+
+#Logo {
+  width: 12.5%;
+  height: auto;
+  top: 5%;
+  left: 50%;
+  transform: translate(-50%);
+  position: absolute;
+  pointer-events: none;
+  background-size: contain;
+}
+
+#Logo:before {
+  content: "";
+  display: block;
+}
+
+#Divider {
+  width: 400px;
+  height: 2px;
+  background-color: #1e2124;
+}

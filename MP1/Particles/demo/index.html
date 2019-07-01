@@ -1,0 +1,71 @@
+<!-- <!DOCTYPE html> -->
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Ripples | Login</title>
+  <link rel="shortcut icon" href="Particles/Logo.png" />
+
+  <meta name="description" content="particles.js is a lightweight JavaScript library for creating particles.">
+  <meta name="author" content="Vincent Garreau" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" media="screen" href="css/style.css">
+
+  <script>
+      function nextPage() {
+        var item = document.getElementById("item").value;
+  var form = this;
+  form.action = "../../index.html?fname=admin&login=Submit";
+  form.submit();
+      }
+      </script>
+
+</head>
+
+<body>
+
+  <!-- particles.js container -->
+  <div id="particles-js">
+    <div class="flex-logo">
+      <img src="../Logo Word.png" id="Logo">
+    </div>
+    <div class="flex-square">
+      
+      <form class="LoginInfo" name="myForm" action="../../HomePage.html" >
+        <p id="EmailText" value="usernameValue" for="Username">EMAIL</p>
+        <input type="text" name="fname" id="Username" spellcheck="false" autocomplete="off" required pattern="admin">
+        <br>
+        <br>
+        <p id="PasswordText" value="passwordValue" for="Password">PASSWORD</p>
+        <input type="password" id="Password" required pattern="p@ssword">
+        <br>
+        <br>
+        <br>
+        <br>
+        <button type="submit" class="LoginSubmit" name="login" onsubmit="window.location.href='../../HomePage.html'">
+        <p id="LoginText">Login</p>
+        </button>
+      </form>
+
+      <br>
+      <br>
+      <div id="Divider"></div>
+      <br>
+      <br>
+      <a href="../../HomePage.html" class="Register">
+        <p id="RegisterText">Register</p>
+      </a>
+    </div>
+  </div>
+
+  <!-- scripts -->
+  <script src="../particles.js"></script>
+  <script src="js/app.js"></script>
+
+
+
+
+</body>
+
+</html>
