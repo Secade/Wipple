@@ -6,14 +6,18 @@
     <script src="jquery-3.4.1.js"></script>
     <script src="json_function.js"></script>
     <link rel="shortcut icon" href="Particles/Logo.png" />
-    <link rel="stylesheet" href="home.css">
     <link rel="stylesheet" href="/MP1/HomePage.css">
+
+    <link rel="stylesheet" href="home.css">
     
 </head>
 
 <body>
-
+        <div class="filterBar">
     <div class="SideBar">
+        
+
+        
         <div class="HomeTop">
             <img src="../Particles/Logo.png" id="Logo">
         </div>
@@ -37,11 +41,6 @@
                     <img src="../stats.png" id="HomeButton">
                 </li>
             </a>
-            <a href="/MP1/Charts/Home.html" class="Home">
-                <li>
-                    <img src="../stats.png" id="HomeButton">
-                </li>
-            </a>
         </ul>
         <div class="lineDown"></div>
         <ul class="BottomSet">
@@ -53,15 +52,10 @@
 
         </ul>
     </div>
-
-
-    <a href="dummy.html">Other page</a>
-
-
-
-    <div class="top">
+</div>
+ <div class="top">
         <button id="ref" type="button" onclick="refresh()">Refresh</button>
-        <label><input type="file" multiple id="file_input" onchange="upload()"></label>
+        <input type="file" multiple id="file_input" onchange="upload()">
     </div>
     <div class="searchdiv">
         Search Sales<br>
