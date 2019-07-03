@@ -16,6 +16,9 @@ $(document).ready(function(){
     $.get("krustykrab_array.json", function(data) {
         start($.parseJSON(data));
     })
+    $("#upload").click(function() {
+        $("#file_input").click();
+    })
 });
 
 function start(something) {
