@@ -232,9 +232,9 @@ function loadAllSales() {
     var objects = [];
     for(var m = 0; m < customerList.length; m++) {
         var colors = [];
-        colors.push(color[m]);
-        colors.push(color[m]);
-        colors.push(color[m]);
+        for(var p = 0; p < burgerList.length; p++) {
+            colors.push(color[m]);
+        }
         objects.push(generateObjects(customerList[m], arr[m], color[m]));
     }
     refresh();
