@@ -63,22 +63,28 @@ function updateChartSales(name, num, list) {
             display: false
         },
         scales: {
-          yAxes: [{
-              ticks: {
-                  beginAtZero: true,
-                  fontColor: "blue",
-                  fontStyle: "bold"
-              }
-          }],
-          xAxes: [{
-            ticks: {
-                fontColor: "blue",
-                fontStyle: "bold"
-            }
-        }]
-      }
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    fontColor: "blue",
+                    fontStyle: "bold"
+                },
+                gridLines: {
+                    color: "white"
+                }
+            }],
+            xAxes: [{
+                ticks: {
+                    fontColor: "blue",
+                    fontStyle: "bold"
+                },
+                gridLines: {
+                    color: "white"
+                }
+            }]
+        }
     }
-  });
+    });
 }
 
 function loadSalesByBurger(burger_type) {
@@ -190,10 +196,6 @@ function loadAllSalesByDate(input) {
         }    
         var objects = [];
         for(var i = 0; i < customerList.length; i++) {
-            var colors = [];
-            colors.push(color[i]);
-            colors.push(color[i]);
-            colors.push(color[i]);
             objects.push(generateObjects(customerList[i], arr[i], color[i]));
         }
 
@@ -231,10 +233,6 @@ function loadAllSales() {
     }    
     var objects = [];
     for(var m = 0; m < customerList.length; m++) {
-        var colors = [];
-        for(var p = 0; p < burgerList.length; p++) {
-            colors.push(color[m]);
-        }
         objects.push(generateObjects(customerList[m], arr[m], color[m]));
     }
     refresh();
@@ -271,19 +269,41 @@ function updateSalesByDate(name, num, alldata) {
         datasets: alldata,
     },
     options: {
-      title: {
-          display: true,
-          text: name
-      },
-      scales: {
-          yAxes: [{
-              ticks: {
-                  beginAtZero: true
-              }
-          }]
-      }
+        title: {
+            display: true,
+            text: name,
+            fontColor: "white",
+            fontStyle: "bold"
+        },
+        legend: {
+            labels: {
+                fontColor: "white",
+                fontStyle: "bold"
+            }
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    fontColor: "white",
+                    fontStyle: "bold"
+                },
+                gridLines: {
+                    color: "white"
+                }
+            }],
+            xAxes: [{
+                ticks: {
+                    fontColor: "white",
+                    fontStyle: "bold"
+                },
+                gridLines: {
+                    color: "white"
+                }
+            }]
+        }
     }
-  }); 
+    }); 
 }
 
 function loadTimePerDayBurger(date, burger_type) {
@@ -385,24 +405,31 @@ function updateTimePerDay(num, year, mon, day) {
     options: {
         title: {
             display: true,
-            text: "Customers per hour in " + month_list[mon - 1] + " " + day + ", " + year
+            text: "Customers per hour in " + month_list[mon - 1] + " " + day + ", " + year,
+            fontColor: "white",
+            fontStyle: "bold"
         },
         legend: {
             display: false
         },
         scales: { 
-          yAxes: [{
-              ticks: {
-                    beginAtZero: true,
-                    fontColor: "blue",
-                    fontStyle: "bold"
-              }
-          }],
-          xAxes: [{
+            yAxes: [{
                 ticks: {
                     beginAtZero: true,
-                    fontColor: "blue",
+                    fontColor: "white",
                     fontStyle: "bold"
+                },
+                gridLines: {
+                    color: "white"
+                }
+            }],
+            xAxes: [{
+                ticks: {
+                    fontColor: "white",
+                    fontStyle: "bold"
+                },
+                gridLines: {
+                    color: "white"
                 }
             }]
         }
@@ -497,7 +524,9 @@ function updateSalesByComplete(name, num) {
         options: {
             title: {
                 display: true,
-                text: name
+                text: name,
+                fontColor: "white",
+                fontStyle: "bold"
             },
             legend: {
                 display: false
@@ -506,14 +535,14 @@ function updateSalesByComplete(name, num) {
                 yAxes: [{
                     ticks: {
                         beginAtZero: true,
-                        fontColor: "blue",
+                        fontColor: "white",
                         fontStyle: "bold"
                     }
                 }],
                 xAxes: [{
                     ticks: {
                         display: false,
-                        fontColor: "blue",
+                        fontColor: "white",
                         fontStyle: "bold"
                     }
                 }]
