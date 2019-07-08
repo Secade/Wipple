@@ -16,6 +16,9 @@ $(document).ready(function(){
     $.get("krustykrab_array.json", function(data) {
         start($.parseJSON(data));
     })
+    $("#upload").click(function() {
+        $("#file_input").click();
+    })
 });
 
 function start(something) {
@@ -35,6 +38,7 @@ function init() {
     test.hidden = true;
     var test1 = document.getElementById('showData');
     test1.hidden = true;
+    $(".scroll").css("overflow-y"," hidden")
 }
 
 function updateChartSales(name, num, list) {    
@@ -623,6 +627,7 @@ function createAllSalesTable() {
     var divContainer = document.getElementById("showData");
     divContainer.innerHTML = "";
     divContainer.appendChild(table);
+    $(".scroll").css("overflow-y","scroll")
 }
 
 function createSalesPerDay(burger_type, customer) {
@@ -664,6 +669,8 @@ function createSalesPerDay(burger_type, customer) {
     var divContainer = document.getElementById("showData");
     divContainer.innerHTML = "";
     divContainer.appendChild(table);
+    $(".scroll").css("overflow-y","scroll")
+
 }
 
 function customerPerDay() {
@@ -717,6 +724,8 @@ function customerPerDay() {
     var divContainer = document.getElementById("showData");
     divContainer.innerHTML = "";
     divContainer.appendChild(table);
+    $(".scroll").css("overflow-y","scroll")
+
 }
 
 function refresh() {

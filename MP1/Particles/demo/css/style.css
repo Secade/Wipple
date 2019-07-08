@@ -224,8 +224,8 @@ canvas {
 .LoginInfo {}
 
 #Username {
-  width: 380px;
-  height: 20px;
+  width: 400px;
+  height: 35px;
   padding: 10px;
   background-color: #1e2124;
   border-color: rgba(0, 0, 0, .3);
@@ -240,8 +240,8 @@ canvas {
 }
 
 #Password {
-  width: 380px;
-  height: 20px;
+  width: 400px;
+  height: 35px;
   padding: 10px;
   background-color: #1e2124;
   border-color: rgba(0, 0, 0, .3);
