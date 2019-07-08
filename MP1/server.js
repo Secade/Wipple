@@ -40,15 +40,5 @@ function sendError(response) {
     response.end();
 }
 
-// function readFile() {
-//     let data = fs.readFileSync('krustykrab.json');
-//     let something = JSON.parse(data);
-//     window.localStorage.setItem(something, JSON.stringify(something));
-//     let another = window.localStorage.getItem("something");
-//     console.log(another);
-
-//     return something;
-// }
-
 http.createServer(onRequest).listen(4000);
 console.log('Listening on port 4000...');
