@@ -9,162 +9,177 @@
     <link rel="stylesheet" href="/MP1/HomePage.css">
     <link rel="stylesheet" href="home.css">
 
-
+    <script>
+        function nextPage() {
+            var item = document.getElementById("item").value;
+            var form = this;
+            form.action = "../../index.html?fname=admin&login=Submit";
+            form.submit();
+        }
+    </script>
 
 </head>
 
 <body>
-
-    <div class="filterBar">
-        <div class="SideBar">
-
-
-
-            <div class="HomeTop">
-                <img src="../Particles/Logo.png" id="Logo">
-            </div>
-            <div class="lineUp"></div>
-            <ul class="ButtonSelect">
-                <li class="Select1"></li>
-                <li class="Select2"></li>
-                <li class="Select3"></li>
-                <li class="Select4"></li>
-                <li class="Select5"></li>
-
-            </ul>
-            <ul class="ButtonList">
-                <a href="/MP1/HomePage.html" class="Home">
-                    <li>
-                        <img src="../Home.png" id="HomeButton">
-                    </li>
-                </a>
-                <a href="/MP1/JSON/Home.html" class="Home">
-                    <li>
-                        <img src="../stats.png" id="HomeButton">
-                    </li>
-                </a>
-            </ul>
-            <div class="lineDown"></div>
-            <ul class="BottomSet">
-                <a href="/MP1/Particles/demo/index.html" class="BottomButton">
-                    <li>
-                        <img src="../logout.png" id="Logout">
-                    </li>
-                </a>
-
-            </ul>
-        </div>
-
-        <div id="searchOptions">
+    <div id="particles-js">
+        <div class="filterBar">
+            <div class="SideBar">
 
 
 
-            <div class="top">
+                <div class="HomeTop">
+                    <img src="../Particles/Logo.png" id="Logo">
+                </div>
+                <div class="lineUp"></div>
+                <ul class="ButtonSelect">
+                    <li class="Select1"></li>
+                    <li class="Select2"></li>
+                    <li class="Select3"></li>
+                    <li class="Select4"></li>
+                    <li class="Select5"></li>
 
-            </div>
-            <div class="searchdiv">
-                <input type="file" multiple id="file_input" onchange="upload()">
+                </ul>
+                <ul class="ButtonList">
+                    <a href="/MP1/HomePage.html" class="Home">
+                        <li>
+                            <img src="../Home.png" id="HomeButton">
+                        </li>
+                    </a>
+                    <a href="/MP1/JSON/Home.html" class="Home">
+                        <li>
+                            <img src="../stats.png" id="HomeButton">
+                        </li>
+                    </a>
+                </ul>
+                <div class="lineDown"></div>
+                <ul class="BottomSet">
+                    <a href="/MP1/Particles/demo/index.html" class="BottomButton">
+                        <li>
+                            <img src="../logout.png" id="Logout">
+                        </li>
+                    </a>
 
-                <p id="AS">
-                    Search Sales
-                </p>
-
-                <input type="date" placeholder="Input date" id="input">
-                <button id="sales" type="button" onclick="loadAllSalesByDate(document.getElementById('input').value)">
-                    <img src="../search.png" id="searchButton"><br>
-                </button>
-            </div>
-            <div class="loading">
-                <p id="AS">
-                    Advance Search
-                </p>
-
-                <input type="date" placeholder="Input date" id="specific_input">
-                <button id="kc" type="button"
-                    onclick="filterData(document.getElementById('specific_input').value, document.getElementById('burger').value, document.getElementById('customer').value)">
-                    <img src="../search.png" id="searchButton">
-                </button>
-                <select id="customer">
-                    <option value="all">All</option>
-                    <option value="leatherback turtle">Leatherback Turtle</option>
-                    <option value="salmon">Salmon</option>
-                    <option value="seahorse">Seahorse</option>
-                    <option value="coral">Coral</option>
-                    <option value="giant clam">Giant Clam</option>
-                    <option value="gray whale">Gray Whale</option>
-                    <option value="sea lion">Sea Lion</option>
-                </select>
-                <select id="burger">
-                    <option value="all">All</option>
-                    <option value="Krabby Pattie">Krabby Pattie</option>
-                    <option value="Krusty Deluxe">Krusty Deluxe</option>
-                    <option value="Krusty Combo">Krusty Combo</option>
-                </select>
-
-            </div>
-
-            <div>
-                <ul class="buttonRow">
-                    <li id="butt">
-                        <button id="ref" type="button" onclick="refresh()"> <img src="../refresh.png"
-                                id="refreshButton"></button>
-                        <p id="buttonText">
-                            Refresh
-                        </p>
-
-                    </li>
-                    <li id="butt">
-                        <button id="upload"><img src="../upload.png" id="refreshButton"></button>
-                        <p id="buttonText">
-                            Upload
-                        </p>
-                    </li>
-                    <li id="butt">
-                        <button class="buttontable" type="button" onclick="customerPerDay()"
-                            aria-label="Customer Per Day">
-                            <img src="../group.png" id="groupButton"><br>
-
-                        </button>
-                        <p id="buttonText">
-                            CPD
-                        </p>
-                    </li>
                 </ul>
             </div>
-            <div id="line"></div>
-            <div id="stats">
-                <div id="chart_detail">
-                        <p id="TC">Total Burgers Sold: <span id='total'></span></p> 
-                    Krabby Pattie: <span id='kpattie'></span><br>
-                    Krusty Deluxe: <span id='kdeluxe'></span><br>
-                    Krusty Combo: <span id='kcombo'></span><br>
-                </div>
-                
 
-                <div id="chart_detail">
-                    <p id="TC">Total Customer: <span id='total_customer'></span></p>
-                    Leatherback Turtle: <span id='lt'></span><br>
-                    Salmon: <span id='sal'></span><br>
-                    Seahorse: <span id='sh'></span><br>
-                    Coral: <span id='cor'></span><br>
-                    Giant Clam: <span id='gc'></span><br>
-                    Gray Whale: <span id='gw'></span><br>
-                    Sea Lion: <span id='sl'></span><br>
+            <div id="searchOptions">
+
+
+
+                <div class="top">
+
+                </div>
+                <div class="searchdiv">
+                    <input type="file" multiple id="file_input" onchange="upload()">
+
+                    <p id="AS">
+                        Search Sales
+                    </p>
+
+                    <input type="date" placeholder="Input date" id="input">
+                    <button id="sales" type="button"
+                        onclick="loadAllSalesByDate(document.getElementById('input').value)">
+                        <img src="../search.png" id="searchButton"><br>
+                    </button>
+                </div>
+                <div class="loading">
+                    <p id="AS">
+                        Advance Search
+                    </p>
+
+                    <input type="date" placeholder="Input date" id="specific_input">
+                    <button id="kc" type="button"
+                        onclick="filterData(document.getElementById('specific_input').value, document.getElementById('burger').value, document.getElementById('customer').value)">
+                        <img src="../search.png" id="searchButton">
+                    </button>
+                    <select id="customer">
+                        <option value="all">All</option>
+                        <option value="leatherback turtle">Leatherback Turtle</option>
+                        <option value="salmon">Salmon</option>
+                        <option value="seahorse">Seahorse</option>
+                        <option value="coral">Coral</option>
+                        <option value="giant clam">Giant Clam</option>
+                        <option value="gray whale">Gray Whale</option>
+                        <option value="sea lion">Sea Lion</option>
+                    </select>
+                    <select id="burger">
+                        <option value="all">All</option>
+                        <option value="Krabby Pattie">Krabby Pattie</option>
+                        <option value="Krusty Deluxe">Krusty Deluxe</option>
+                        <option value="Krusty Combo">Krusty Combo</option>
+                    </select>
+
+                </div>
+
+                <div>
+                    <ul class="buttonRow">
+                        <li id="butt">
+                            <button id="ref" type="button" onclick="refresh()"> <img src="../refresh.png"
+                                    id="refreshButton"></button>
+                            <p id="buttonText">
+                                Refresh
+                            </p>
+
+                        </li>
+                        <li id="butt">
+                            <button id="upload"><img src="../upload.png" id="refreshButton"></button>
+                            <p id="buttonText">
+                                Upload
+                            </p>
+                        </li>
+                        <li id="butt">
+                            <button class="buttontable" type="button" onclick="customerPerDay()"
+                                aria-label="Customer Per Day">
+                                <img src="../group.png" id="groupButton"><br>
+
+                            </button>
+                            <p id="buttonText">
+                                CPD
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+                <div id="line"></div>
+                <div id="stats">
+                    <div id="chart_detail">
+                        <p id="TC">Total Burgers Sold: <span id='total'></span></p>
+                        Krabby Pattie: <span id='kpattie'></span><br>
+                        Krusty Deluxe: <span id='kdeluxe'></span><br>
+                        Krusty Combo: <span id='kcombo'></span><br>
+                    </div>
+
+
+                    <div id="chart_detail">
+                        <p id="TC">Total Customer: <span id='total_customer'></span></p>
+                        Leatherback Turtle: <span id='lt'></span><br>
+                        Salmon: <span id='sal'></span><br>
+                        Seahorse: <span id='sh'></span><br>
+                        Coral: <span id='cor'></span><br>
+                        Giant Clam: <span id='gc'></span><br>
+                        Gray Whale: <span id='gw'></span><br>
+                        Sea Lion: <span id='sl'></span><br>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="chart">
+            <canvas id="myChart" width="30" height="25"></canvas>
+            <canvas id="oneDay" width="30" height="25"></canvas>
+        </div>
+
+
+        <div class="scroll">
+            <div id="showData"></div>
+        </div>
+
+        <script src="../Particles/particles.js"></script>
+        <script>
+            particlesJS.load('particles-js', 'particlesjs-home.json', function () {
+                console.log('particles.js loaded - callback');
+            });
+        </script>
+        <script src="../Particles/demo/js/app.js"></script>
     </div>
-    <div class="chart">
-        <canvas id="myChart" width="30" height="25"></canvas>
-        <canvas id="oneDay" width="30" height="25"></canvas>
-    </div>
-
-
-    <div class="scroll">
-        <div id="showData"></div>
-    </div>
-
-
 </body>
 
 </html>
