@@ -19,6 +19,11 @@
     height: 20px;    
 }
 
+#filter{
+    margin-left: 10px;
+    height: 20px;
+}
+
 th, td, p, input {
     font:14px 'Raleway';
 }
@@ -32,6 +37,10 @@ table, th, td
 }
 th {
     font-weight:bold;
+}
+
+td{
+    width: 200px;
 }
 
 #customer, #burger{
@@ -49,28 +58,53 @@ th {
 }
 
 #stats{
-    position: absolute;
-     bottom: 3%;
+    position: relative;
+    display: block;
      width: auto;
-     height: 390px;
+     height: auto;
 }
 
 .scroll {
     overflow-y: scroll;
     overflow-x: hidden;
-    top: 25%;
-    right: 10%;
-    width: auto;
+    top: 100%;
+    left: 70%;
+        transform: translate(-70%);
+    width: 700px;
     height:900px;
-    position: absolute;
-    display: inline-flex;
+    margin: 20px;
+    position: relative;
+    display: block;
     flex-direction: row;
+    z-index: 0;
 }
 
 #showData{
     width: 100%;
     height: 100%;
 }
+
+/* width */
+::-webkit-scrollbar {
+    width: 7px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: transparent;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #7289DA; 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(88, 105, 168); 
+  }
 
 #input, #specific_input{
     width: 70%;
@@ -114,8 +148,8 @@ th {
 }
 
 .chart {
-    height: 700px;
-    width: 50%;
+    height: 1000px;
+    width: 65%;
     margin-bottom: 20px;
     position: absolute;
     display: block;
@@ -123,7 +157,7 @@ th {
 }
 
 #oneDay, #myChart{
-    width: 300px;
+    width: 400px;
     height: 500px;
     position: flex;
     display: inline-flex;
@@ -152,10 +186,12 @@ th {
     background: #282B30;
     position: fixed;
     border-radius: 0px 20px 20px 0px;
+    top: 0px;
 }
 
 html{
     background: #36393e;
+    overflow-x: hidden;
 }
 
 .flex-square {
@@ -163,6 +199,12 @@ html{
     height: 100%;
     background: #36393e;
     position: absolute;
+}
+
+body{
+    background-color: #36393e;
+    top: 0px;
+    position: relative;
 }
 
 #upload{
@@ -186,10 +228,13 @@ html{
     position: absolute;
     left: 0px;
     top: 0px;
+    /* z-index: -1; */
   }
 
 #AS{
     color: #7289da;
+    width: auto;
+    position: relative;
     font-family: "Raleway";
     font-size: 18px;
     font-weight: 600;
@@ -209,7 +254,7 @@ cursor: pointer;
     height: 0px;
 }
 
-#ref,.buttontable{
+#ref,.buttontable,#loadAll{
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -219,14 +264,14 @@ cursor: pointer;
 
 }
 
-#sales,#kc{
+#sales,#kc, #filter{
     width: 35px;
     height: 35px;
     border-radius: 50%;
     border: none;
     background-color: #1e2124;
     cursor: pointer;
-
+    position: relative;
 }
 
 #searchButton{
@@ -243,6 +288,9 @@ cursor: pointer;
     width: 160px;
     right: 0px;
     padding: 20px;
+    overflow-y : auto;
+    overflow-x: hidden;
+
 }
 
 .SideBar{
@@ -269,8 +317,8 @@ cursor: pointer;
 }
 
 #butt{
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 6px;
+    padding-right: 6px;
 
 }
 
@@ -288,21 +336,39 @@ cursor: pointer;
     transform: translate(-50%);
 }
 
+#allText{
+    width: fit-content;
+    height: auto;
+    color: white;
+    font-family: 'Raleway';
+    font-size: 14px;
+    padding: 0px;
+    margin: 0px;
+    margin-top: 2px;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+}
+
 #line{
     height: 5px;
     width: 80%;
-    top: 50%;
-    left: 10%;
+    left: 50%;
+    transform: translate(-50%);
     border-radius: 25px;
-    background-color: 7289DA;
-    position: absolute;
-    display: inline;
+    background-color: #7289DA;
+    position: relative;
+    display: block;
 }
 
-@media all and (max-width:1600px){
+#filter:hover,#sales:hover,#kc:hover,#ref:hover,#upload:hover,.buttontable:hover,#loadall:hover{
+    background-color: #7289DA;
+}
+
+@media all and (max-width:3000px){
     .chart{
-        left: 50%;
-        transform: translate(-50%);
+        left: 75%;
+        transform: translate(-75%);
     }
 
     #divChart{
@@ -345,7 +411,7 @@ cursor: pointer;
 
     
 
-@media all and (max-width:850px){
+@media all and (max-width:1400px){
     .SideBar{
         display: block;
         width: 30%;
@@ -361,7 +427,7 @@ cursor: pointer;
         margin-bottom: 10px;
     }
 
-    #ref,#upload,.buttontable{
+    #ref,#upload,.buttontable, #loadAll{
         position: relative;
         left: 50%;
         transform: translate(-50%);
@@ -374,16 +440,39 @@ cursor: pointer;
         width: 100%;
     }
 
-    #sales, #kc{
+    #sales, #kc, #filter{
         margin: 0px;
         position: relative;
-        left: 50%;
-        transform: translate(-50%);
+
         margin-top: 10px;
         margin-bottom: 10px;
     }
+
+    #sales, #kc{
+        left: 50%;
+        transform: translate(-50%);
+    }
     #customer, #burger{
         width: 100%;
+    }
+    #AS, #customer{
+        margin: 0px;
+    }
+    .loading{
+        padding: 0px;
+    }
+
+    #butt #buttonText{
+        margin-bottom: 2px;
+    }
+
+    #butt{
+        padding-top: 5px;
+    }
+
+    #filter{
+        padding: 0px;
+        margin-bottom: 5px;
     }
 }
 }

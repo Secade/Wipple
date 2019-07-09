@@ -3,6 +3,7 @@ var temp, temp_data;
 var myChart, oneDay;
 var month_list = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 var burgerList = [], customerList = [];
+var filterOpened=false;
 
 $(document).ready(function(){                
     $('input[type="file"]').change(function(e){
@@ -19,6 +20,9 @@ $(document).ready(function(){
     $("#upload").click(function() {
         $("#file_input").click();
     })
+
+    $(".loading").css("visibility","hidden")
+
 });
 
 function start(something) {
@@ -173,6 +177,7 @@ function loadSalesByCustomerDate(date, customer) {
 }
 
 function loadAllSalesByDate(input) {
+
     var new_date = new Date(input);
     var aa = new_date.getFullYear();
     var bb = new_date.getMonth() + 1;
@@ -215,6 +220,8 @@ function loadAllSalesByDate(input) {
         var i = arr[2][0] + arr[2][1] + arr[2][2];
         var j = arr[5][0] + arr[5][1] + arr[5][2];
         showCount(a, b, c, d, e, f, g, h, i, j);
+        $("#particles-js").css("z-index","-1")
+
         updateSalesByDate("Burger Sales in " + month_list[bb - 1] + " " + cc + ", " + aa, objects);        
     }
 }
@@ -577,24 +584,44 @@ function constructChartComponent(object) {
 }
 
 function viewAllData() {
+    $("#particles-js").css("z-index","-1")
+
     loadAllSales();
     createAllSalesTable();
+    
+}
+
+function openFilter(){
+    if(filterOpened){
+        $(".loading").css("visibility","hidden")
+        filterOpened=false
+    }else{
+        $(".loading").css("visibility","visible")
+        filterOpened=true
+    }
 }
 
 function filterData(date, burger, customer) {
+
     refresh();
+
     if(date == '') {
       if(burger == 'all' && customer == 'all') {
         alert('Please input a valid date');
+        $("#particles-js").css("z-index","0")
+
       } else {
         if(burger == 'all') {
             loadSalesByCustomer(customer);
+            
         } else if(customer == 'all') {
             loadSalesByBurger(burger);
         } else {
             loadSalesByBurgerCustomer(burger, customer);
         }
       }
+      $("#particles-js").css("z-index","-1")
+
     } else {
       if(burger == 'all' && customer == 'all') {
           loadAllSalesByDate(date);
@@ -610,7 +637,10 @@ function filterData(date, burger, customer) {
             loadSalesByDateBurgerCustomer(date, burger, customer);
         }
       }
+      $("#particles-js").css("z-index","-1")
+
     }
+
 }
 
 function showCount(a, b, c, d, e, f, g, h, i, j) {
@@ -669,7 +699,10 @@ function createAllSalesTable() {
     var divContainer = document.getElementById("showData");
     divContainer.innerHTML = "";
     divContainer.appendChild(table);
+    $("#particles-js").css("z-index","-1")
+
     $(".scroll").css("overflow-y","scroll")
+
 }
 
 function createSalesPerDay(burger_type, customer) {
@@ -712,10 +745,11 @@ function createSalesPerDay(burger_type, customer) {
     divContainer.innerHTML = "";
     divContainer.appendChild(table);
     $(".scroll").css("overflow-y","scroll")
-
 }
 
 function customerPerDay() {
+    $("#particles-js").css("z-index","-1")
+
     var col = ['No.','Datetime','Customer'];
 
     var table = document.createElement("table");
@@ -799,6 +833,8 @@ function refresh() {
     $("#stats").css({
         'visibility':'hidden'
     });
+    $("#particles-js").css("z-index","0")
+
 
     init();
 }

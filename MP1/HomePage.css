@@ -249,17 +249,18 @@ body {
 
 #KPTitle {
     color: white;
-    font-family: "Whitney";
+    font-family: "Raleway";
     position: relative;
 
 }
 
 #KPText {
     color: white;
-    font-family: "Whitney";
+    font-family: "Raleway";
     position: relative;
     display: inline-flex;
     top: 0px;
+    margin: 0px;
 }
 
 #Logout{
@@ -289,12 +290,12 @@ body {
     display: inline;
     flex-direction: row;
     color: white;
-    font-family: "Whitney";
+    font-family: "Raleway";
 }
 
-#KKTitle{
-    color: white;
-    font-family: "Whitney";
+#KKTitle, #KPTitle{
+    color: #7289da;
+    font-family: "Raleway";
     font-size: 22px;
     font-weight: 600;
 }
@@ -340,7 +341,7 @@ body {
     display: block;
 }
 
-@media all and (max-width:850px){
+@media all and (max-width:1000px){
     .SideBar{
         display: block;
         width: 20%;
