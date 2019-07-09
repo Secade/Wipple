@@ -1,4 +1,5 @@
 var obj;
+var main;
 var temp, temp_data;
 var myChart, oneDay;
 var month_list = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -22,6 +23,7 @@ $(document).ready(function(){
 });
 
 function start(something) {
+    main = something;
     obj = something.sales;
     // window.localStorage.clear();
     var prev = JSON.parse(window.localStorage.getItem("data"));
@@ -500,9 +502,9 @@ function randomColorFilter(num) {
         var letters = '0123456789ABCDEF';
         var color = '#';
         for (var i = 0; i < 6; i++) {
-          color += letters[Math.floor(Math.random() * 16)];
+            color += letters[Math.floor(Math.random() * 16)];
         }
-        if(!arr.includes(color)) {
+        if(!arr.includes(color) && color != '#282b30') {
             arr.push(color);
             x++;
         }
@@ -805,10 +807,49 @@ function refresh() {
 
 function upload(file) {
     if(file != undefined) {
-        var alldata = obj.concat(file);
-        obj = alldata;
+        var alldata = obj.concat(file.sales);
+        main.sales = alldata;
+        main.burger_sales["Krusty Combo"] = main.burger_sales["Krusty Combo"] + file.burger_sales["Krusty Combo"];
+        main.burger_sales["Krabby Pattie"] = main.burger_sales["Krabby Pattie"] + file.burger_sales["Krabby Pattie"];
+        main.burger_sales["Krusty Deluxe"] = main.burger_sales["Krusty Deluxe"] + file.burger_sales["Krusty Deluxe"];
+        
+        main.species_sales["leatherback turtle"] = main.species_sales["leatherback turtle"] + file.species_sales["leatherback turtle"];
+        main.species_sales["salmon"] = main.species_sales["salmon"] + file.species_sales["salmon"];
+        main.species_sales["seahorse"] = main.species_sales["seahorse"] + file.species_sales["seahorse"];
+        main.species_sales["coral"] = main.species_sales["coral"] + file.species_sales["coral"];
+        main.species_sales["giant clam"] = main.species_sales["giant clam"] + file.species_sales["giant clam"];
+        main.species_sales["gray whale"] = main.species_sales["gray whale"] + file.species_sales["gray whale"];
+        main.species_sales["sea lion"] = main.species_sales["sea lion"] + file.species_sales["sea lion"];
+
+        main.burger_by_species["Krusty Combo"]["leatherback turtle"] = main.burger_by_species["Krusty Combo"]["leatherback turtle"] + file.burger_by_species["Krusty Combo"]["leatherback turtle"];
+        main.burger_by_species["Krusty Combo"]["salmon"] = main.burger_by_species["Krusty Combo"]["salmon"] + file.burger_by_species["Krusty Combo"]["salmon"];
+        main.burger_by_species["Krusty Combo"]["seahorse"] = main.burger_by_species["Krusty Combo"]["seahorse"] + file.burger_by_species["Krusty Combo"]["seahorse"];
+        main.burger_by_species["Krusty Combo"]["coral"] = main.burger_by_species["Krusty Combo"]["coral"] + file.burger_by_species["Krusty Combo"]["coral"];
+        main.burger_by_species["Krusty Combo"]["giant clam"] = main.burger_by_species["Krusty Combo"]["giant clam"] + file.burger_by_species["Krusty Combo"]["giant clam"];
+        main.burger_by_species["Krusty Combo"]["gray whale"] = main.burger_by_species["Krusty Combo"]["gray whale"] + file.burger_by_species["Krusty Combo"]["gray whale"];
+        main.burger_by_species["Krusty Combo"]["sea lion"] = main.burger_by_species["Krusty Combo"]["sea lion"] + file.burger_by_species["Krusty Combo"]["sea lion"];
+
+        main.burger_by_species["Krabby Pattie"]["leatherback turtle"] = main.burger_by_species["Krabby Pattie"]["leatherback turtle"] + file.burger_by_species["Krabby Pattie"]["leatherback turtle"];
+        main.burger_by_species["Krabby Pattie"]["salmon"] = main.burger_by_species["Krabby Pattie"]["salmon"] + file.burger_by_species["Krabby Pattie"]["salmon"];
+        main.burger_by_species["Krabby Pattie"]["seahorse"] = main.burger_by_species["Krabby Pattie"]["seahorse"] + file.burger_by_species["Krabby Pattie"]["seahorse"];
+        main.burger_by_species["Krabby Pattie"]["coral"] = main.burger_by_species["Krabby Pattie"]["coral"] + file.burger_by_species["Krabby Pattie"]["coral"];
+        main.burger_by_species["Krabby Pattie"]["giant clam"] = main.burger_by_species["Krabby Pattie"]["giant clam"] + file.burger_by_species["Krabby Pattie"]["giant clam"];
+        main.burger_by_species["Krabby Pattie"]["gray whale"] = main.burger_by_species["Krabby Pattie"]["gray whale"] + file.burger_by_species["Krabby Pattie"]["gray whale"];
+        main.burger_by_species["Krabby Pattie"]["sea lion"] = main.burger_by_species["Krabby Pattie"]["sea lion"] + file.burger_by_species["Krabby Pattie"]["sea lion"];
+
+        main.burger_by_species["Krusty Deluxe"]["leatherback turtle"] = main.burger_by_species["Krusty Deluxe"]["leatherback turtle"] + file.burger_by_species["Krusty Deluxe"]["leatherback turtle"];
+        main.burger_by_species["Krusty Deluxe"]["salmon"] = main.burger_by_species["Krusty Deluxe"]["salmon"] + file.burger_by_species["Krusty Deluxe"]["salmon"];
+        main.burger_by_species["Krusty Deluxe"]["seahorse"] = main.burger_by_species["Krusty Deluxe"]["seahorse"] + file.burger_by_species["Krusty Deluxe"]["seahorse"];
+        main.burger_by_species["Krusty Deluxe"]["coral"] = main.burger_by_species["Krusty Deluxe"]["coral"] + file.burger_by_species["Krusty Deluxe"]["coral"];
+        main.burger_by_species["Krusty Deluxe"]["giant clam"] = main.burger_by_species["Krusty Deluxe"]["giant clam"] + file.burger_by_species["Krusty Deluxe"]["giant clam"];
+        main.burger_by_species["Krusty Deluxe"]["gray whale"] = main.burger_by_species["Krusty Deluxe"]["gray whale"] + file.burger_by_species["Krusty Deluxe"]["gray whale"];
+        main.burger_by_species["Krusty Deluxe"]["sea lion"] = main.burger_by_species["Krusty Deluxe"]["sea lion"] + file.burger_by_species["Krusty Deluxe"]["sea lion"];
+
+        obj = main.sales;
+        console.log(obj)
+        console.log(main);
+
         window.localStorage.setItem("data", JSON.stringify(obj));
-        console.log(JSON.parse(window.localStorage.getItem("data")));
         constructChartComponent(obj);
     }
 }
