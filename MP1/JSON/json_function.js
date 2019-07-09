@@ -215,7 +215,7 @@ function loadAllSalesByDate(input) {
         var i = arr[2][0] + arr[2][1] + arr[2][2];
         var j = arr[5][0] + arr[5][1] + arr[5][2];
         showCount(a, b, c, d, e, f, g, h, i, j);
-        updateSalesByDate("Burger Sales in " + month_list[bb - 1] + " " + cc + ", " + aa, customerList.length, objects);        
+        updateSalesByDate("Burger Sales in " + month_list[bb - 1] + " " + cc + ", " + aa, objects);        
     }
 }
 
@@ -251,7 +251,7 @@ function loadAllSales() {
     var i = arr[2][0] + arr[2][1] + arr[2][2];
     var j = arr[5][0] + arr[5][1] + arr[5][2];
     showCount(a, b, c, d, e, f, g, h, i, j);
-    updateSalesByDate("Burger Sales" , customerList.length, objects);
+    updateSalesByDate("Burger Sales" , objects);
 }
 
 function generateObjects(name, value, color) {
@@ -263,9 +263,8 @@ function generateObjects(name, value, color) {
     return obj;
 }
 
-function updateSalesByDate(name, num, alldata) {
+function updateSalesByDate(name, alldata) {
     var ctx = document.getElementById('myChart');
-    var color = randomColorFilter(num);
     myChart = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -462,7 +461,7 @@ function loadSalesByBurgerCustomer(burger_type, customer) {
     temp = date_arr;
     temp_data = arr;
     refresh();
-    updateSalesByComplete(burger_type + " orders by " + customer, arr.length);
+    updateSalesByComplete(burger_type + " orders by " + customer, arr.length, "bar");
     createSalesPerDay(burger_type, customer);
 }
 
@@ -511,10 +510,10 @@ function randomColorFilter(num) {
     return arr;
 }
 
-function updateSalesByComplete(name, num) {
+function updateSalesByComplete(name, num, chartType) {
     var ctx = document.getElementById('myChart');
     myChart = new Chart(ctx, {
-        type: 'bar',
+        type: chartType,
         data: {
             labels: temp,
             datasets: [{
@@ -541,6 +540,9 @@ function updateSalesByComplete(name, num) {
                         beginAtZero: true,
                         fontColor: "white",
                         fontStyle: "bold"
+                    },
+                    gridLines: {
+                        color: "white"
                     }
                 }],
                 xAxes: [{
@@ -548,6 +550,9 @@ function updateSalesByComplete(name, num) {
                         display: false,
                         fontColor: "white",
                         fontStyle: "bold"
+                    },
+                    gridLines: {
+                        color: "white"
                     }
                 }]
             }
@@ -571,12 +576,16 @@ function constructChartComponent(object) {
     customerList.sort();
 }
 
+function viewAllData() {
+    loadAllSales();
+    createAllSalesTable();
+}
+
 function filterData(date, burger, customer) {
     refresh();
     if(date == '') {
       if(burger == 'all' && customer == 'all') {
-          loadAllSales();
-          createAllSalesTable();
+        alert('Please input a valid date');
       } else {
         if(burger == 'all') {
             loadSalesByCustomer(customer);
@@ -736,7 +745,7 @@ function customerPerDay() {
 
     temp = time;
     temp_data = number;
-    updateSalesByComplete("Number of Customers per day", time.length);
+    updateSalesByComplete("Number of Customers per day", time.length, 'bar');
 
     for(var x = 0; x < time.length; x++) {
         tr = table.insertRow(-1);
