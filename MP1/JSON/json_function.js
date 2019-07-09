@@ -34,8 +34,9 @@ function start(something) {
 
 function init() {
     window.localStorage.setItem("data", JSON.stringify(obj));
-    var test = document.getElementById('chart_detail');
-    test.hidden = true;
+    $("#stats").css({
+        'visibility':'hidden'
+    });
     var test1 = document.getElementById('showData');
     test1.hidden = true;
     $(".scroll").css("overflow-y"," hidden")
@@ -58,7 +59,9 @@ function updateChartSales(name, num, list) {
     options: {
         title: {
             display: true,
-            text: name
+            text: name,
+            fontColor: 'white',
+            fontStyle: 'bold'
         },
         legend: {
             display: false
@@ -67,7 +70,7 @@ function updateChartSales(name, num, list) {
             yAxes: [{
                 ticks: {
                     beginAtZero: true,
-                    fontColor: "blue",
+                    fontColor: "white",
                     fontStyle: "bold"
                 },
                 gridLines: {
@@ -76,7 +79,7 @@ function updateChartSales(name, num, list) {
             }],
             xAxes: [{
                 ticks: {
-                    fontColor: "blue",
+                    fontColor: "white",
                     fontStyle: "bold"
                 },
                 gridLines: {
@@ -331,7 +334,7 @@ function loadTimePerDayBurger(date, burger_type) {
     }
     temp = time_arr;
     temp_data = arr;
-    updateTimePerDay(time_arr.length, aa, bb, cc);
+    updateTimePerDay("Customers per hour in " + month_list[bb - 1] + " " + cc + ", " + aa, time_arr.length);
 }
 
 function loadTimePerDayCustomer(date, customer) {
@@ -358,7 +361,7 @@ function loadTimePerDayCustomer(date, customer) {
     }
     temp = time_arr;
     temp_data = arr;
-    updateTimePerDay(time_arr.length, aa, bb, cc);
+    updateTimePerDay("Customers per hour in " + month_list[bb - 1] + " " + cc + ", " + aa, time_arr.length);
 }
 
 function loadTimePerDayAll(date) {
@@ -386,10 +389,10 @@ function loadTimePerDayAll(date) {
     }
     temp = time_arr;
     temp_data = arr;
-    updateTimePerDay(time_arr.length, aa, bb, cc);
+    updateTimePerDay("Customers per hour in " + month_list[bb - 1] + " " + cc + ", " + aa, time_arr.length);
 }
 
-function updateTimePerDay(num, year, mon, day) {
+function updateTimePerDay(name, num) {
     var ctx = document.getElementById('oneDay');
     oneDay = new Chart(ctx, {
     type: 'bar',
@@ -406,7 +409,7 @@ function updateTimePerDay(num, year, mon, day) {
     options: {
         title: {
             display: true,
-            text: "Customers per hour in " + month_list[mon - 1] + " " + day + ", " + year,
+            text: name,
             fontColor: "white",
             fontStyle: "bold"
         },
@@ -488,7 +491,7 @@ function loadSalesByDateBurgerCustomer(date, burger_type, customer) {
     temp = time_arr;
     temp_data = arr;
     refresh();
-    updateSalesByComplete(burger_type + " orders by " + customer + " in " + month_list[bb - 1] + " " + cc + ", " + aa, time_arr.length);
+    updateTimePerDay(burger_type + " orders by " + customer + " in " + month_list[bb - 1] + " " + cc + ", " + aa, time_arr.length);
 }
 
 function randomColorFilter(num) {
@@ -615,8 +618,9 @@ function showCount(a, b, c, d, e, f, g, h, i, j) {
     document.getElementById('gw').innerHTML = i;
     document.getElementById('sl').innerHTML = j;
 
-    var test = document.getElementById('chart_detail');
-    test.hidden = false;
+    $("#stats").css({
+        'visibility':'visible'
+    });
 }
 
 function createAllSalesTable() {
@@ -682,7 +686,7 @@ function createSalesPerDay(burger_type, customer) {
         for(var i = 0; i < col.length; i++) {
             var tabCell = tr.insertCell(-1);            
             if(i == 0) {
-                tabCell.innerHTML = i+1;
+                tabCell.innerHTML = m+1;
             } else if(i == 1) {
                 tabCell.innerHTML = data.datetime;
             } else if(i == 2) {
@@ -769,6 +773,24 @@ function refresh() {
         oneDay.destroy();
         oneDay = null;
     }
+
+    document.getElementById('total').innerHTML = '';
+    document.getElementById('kpattie').innerHTML = '';
+    document.getElementById('kdeluxe').innerHTML = '';
+    document.getElementById('kcombo').innerHTML = '';
+    document.getElementById('total_customer').innerHTML = '';
+    document.getElementById('lt').innerHTML = '';
+    document.getElementById('sal').innerHTML = '';
+    document.getElementById('sh').innerHTML = '';
+    document.getElementById('cor').innerHTML = '';
+    document.getElementById('gc').innerHTML = '';
+    document.getElementById('gw').innerHTML = '';
+    document.getElementById('sl').innerHTML = '';
+
+    $("#stats").css({
+        'visibility':'hidden'
+    });
+
     init();
 }
 
