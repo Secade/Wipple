@@ -45,7 +45,7 @@ function init() {
     });
     var test1 = document.getElementById('showData');
     test1.hidden = true;
-    $(".scroll").css("overflow-y"," hidden")
+    $(".scroll").css("overflow-y"," hidden");
 }
 
 function updateChartSales(name, num, list) {    
@@ -225,6 +225,17 @@ function loadAllSalesByDate(input) {
         $("#particles-js").css("z-index","-1")
 
         updateSalesByDate("Burger Sales in " + month_list[bb - 1] + " " + cc + ", " + aa, objects);        
+        if($("#specific_input").val() != '') {
+            if($("#input").val() != '') {
+                if($("#customer").val() != 'all' || $("#burger").val() != 'all') {
+                    $("#specific_input").val('');
+                    $("#customer").val('all');
+                    $("#burger").val('all');
+                } else {
+                    $("#input").val('');
+                }
+            }
+        }
     }
 }
 
@@ -470,7 +481,7 @@ function loadSalesByBurgerCustomer(burger_type, customer) {
     temp = date_arr;
     temp_data = arr;
     refresh();
-    updateSalesByComplete(burger_type + " orders by " + customer, arr.length, "bar");
+    updateSalesByComplete(burger_type + " orders by " + customer, arr.length);
     createSalesPerDay(burger_type, customer);
 }
 
@@ -499,7 +510,7 @@ function loadSalesByDateBurgerCustomer(date, burger_type, customer) {
     temp = time_arr;
     temp_data = arr;
     refresh();
-    updateTimePerDay(burger_type + " orders by " + customer + " in " + month_list[bb - 1] + " " + cc + ", " + aa, time_arr.length);
+    updateChartSales(burger_type + " orders by " + customer + " in " + month_list[bb - 1] + " " + cc + ", " + aa, time_arr.length, time_arr);
 }
 
 function randomColorFilter(num) {
@@ -519,10 +530,10 @@ function randomColorFilter(num) {
     return arr;
 }
 
-function updateSalesByComplete(name, num, chartType) {
+function updateSalesByComplete(name, num) {
     var ctx = document.getElementById('myChart');
     myChart = new Chart(ctx, {
-        type: chartType,
+        type: 'bar',
         data: {
             labels: temp,
             datasets: [{
@@ -590,7 +601,10 @@ function viewAllData() {
 
     loadAllSales();
     createAllSalesTable();
-    
+    $("#input").val('');
+    $("#specific_input").val('');
+    $("#customer").val('all');
+    $("#burger").val('all');
 }
 
 function openFilter(){
@@ -608,41 +622,39 @@ function filterData(date, burger, customer) {
     refresh();
 
     if(date == '') {
-      if(burger == 'all' && customer == 'all') {
-        alert('Please input a valid date');
-        $("#particles-js").css("z-index","0")
+        if(burger == 'all' && customer == 'all') {
+            alert('Please input a valid date');
+            $("#particles-js").css("z-index","0")
 
-      } else {
-        if(burger == 'all') {
-            loadSalesByCustomer(customer);
-            
-        } else if(customer == 'all') {
-            loadSalesByBurger(burger);
         } else {
-            loadSalesByBurgerCustomer(burger, customer);
+            if(burger == 'all') {
+                loadSalesByCustomer(customer);
+            } else if(customer == 'all') {
+                loadSalesByBurger(burger);
+            } else {
+                loadSalesByBurgerCustomer(burger, customer);
+            }
         }
-      }
-      $("#particles-js").css("z-index","-1")
+        $("#particles-js").css("z-index","-1");
 
     } else {
-      if(burger == 'all' && customer == 'all') {
-          loadAllSalesByDate(date);
-          loadTimePerDayAll(date);
-      } else {
-        if(burger == 'all') {
-            loadSalesByCustomerDate(date, customer);
-            loadTimePerDayCustomer(date, customer);
-        } else if(customer == 'all') {
-            loadSalesByBurgerDate(date, burger);
-            loadTimePerDayBurger(date, burger);
+        if(burger == 'all' && customer == 'all') {
+            loadAllSalesByDate(date);
+            loadTimePerDayAll(date);
         } else {
-            loadSalesByDateBurgerCustomer(date, burger, customer);
+            if(burger == 'all') {
+                loadSalesByCustomerDate(date, customer);
+                loadTimePerDayCustomer(date, customer);
+            } else if(customer == 'all') {
+                loadSalesByBurgerDate(date, burger);
+                loadTimePerDayBurger(date, burger);
+            } else {
+                loadSalesByDateBurgerCustomer(date, burger, customer);
+            }
         }
-      }
-      $("#particles-js").css("z-index","-1")
-
+        $("#particles-js").css("z-index","-1");
     }
-
+    $("#input").val('');
 }
 
 function showCount(a, b, c, d, e, f, g, h, i, j) {
@@ -781,7 +793,7 @@ function customerPerDay() {
 
     temp = time;
     temp_data = number;
-    updateSalesByComplete("Number of Customers per day", time.length, 'bar');
+    updateSalesByComplete("Number of Customers per day", time.length);
 
     for(var x = 0; x < time.length; x++) {
         tr = table.insertRow(-1);
@@ -803,7 +815,8 @@ function customerPerDay() {
     divContainer.innerHTML = "";
     divContainer.appendChild(table);
     $(".scroll").css("overflow-y","scroll")
-
+    $("#input").val('');
+    $("#specific_input").val('');
 }
 
 function refresh() {
@@ -837,54 +850,59 @@ function refresh() {
     });
     $("#particles-js").css("z-index","0")
 
-
     init();
+}
+
+function refreshInput() {
+    $("#input").val('');
+    $("#specific_input").val('');
+    $("#customer").val('all');
+    $("#burger").val('all');
+    refresh();
 }
 
 function upload(file) {
     if(file != undefined) {
         var alldata = obj.concat(file.sales);
         main.sales = alldata;
-        main.burger_sales["Krusty Combo"] = main.burger_sales["Krusty Combo"] + file.burger_sales["Krusty Combo"];
-        main.burger_sales["Krabby Pattie"] = main.burger_sales["Krabby Pattie"] + file.burger_sales["Krabby Pattie"];
-        main.burger_sales["Krusty Deluxe"] = main.burger_sales["Krusty Deluxe"] + file.burger_sales["Krusty Deluxe"];
+        main.burger_sales["Krusty Combo"] += file.burger_sales["Krusty Combo"];
+        main.burger_sales["Krabby Pattie"] += file.burger_sales["Krabby Pattie"];
+        main.burger_sales["Krusty Deluxe"] += file.burger_sales["Krusty Deluxe"];
         
-        main.species_sales["leatherback turtle"] = main.species_sales["leatherback turtle"] + file.species_sales["leatherback turtle"];
-        main.species_sales["salmon"] = main.species_sales["salmon"] + file.species_sales["salmon"];
-        main.species_sales["seahorse"] = main.species_sales["seahorse"] + file.species_sales["seahorse"];
-        main.species_sales["coral"] = main.species_sales["coral"] + file.species_sales["coral"];
-        main.species_sales["giant clam"] = main.species_sales["giant clam"] + file.species_sales["giant clam"];
-        main.species_sales["gray whale"] = main.species_sales["gray whale"] + file.species_sales["gray whale"];
-        main.species_sales["sea lion"] = main.species_sales["sea lion"] + file.species_sales["sea lion"];
+        main.species_sales["leatherback turtle"] += file.species_sales["leatherback turtle"];
+        main.species_sales["salmon"] += file.species_sales["salmon"];
+        main.species_sales["seahorse"] += file.species_sales["seahorse"];
+        main.species_sales["coral"] += file.species_sales["coral"];
+        main.species_sales["giant clam"] += file.species_sales["giant clam"];
+        main.species_sales["gray whale"] += file.species_sales["gray whale"];
+        main.species_sales["sea lion"] += file.species_sales["sea lion"];
 
-        main.burger_by_species["Krusty Combo"]["leatherback turtle"] = main.burger_by_species["Krusty Combo"]["leatherback turtle"] + file.burger_by_species["Krusty Combo"]["leatherback turtle"];
-        main.burger_by_species["Krusty Combo"]["salmon"] = main.burger_by_species["Krusty Combo"]["salmon"] + file.burger_by_species["Krusty Combo"]["salmon"];
-        main.burger_by_species["Krusty Combo"]["seahorse"] = main.burger_by_species["Krusty Combo"]["seahorse"] + file.burger_by_species["Krusty Combo"]["seahorse"];
-        main.burger_by_species["Krusty Combo"]["coral"] = main.burger_by_species["Krusty Combo"]["coral"] + file.burger_by_species["Krusty Combo"]["coral"];
-        main.burger_by_species["Krusty Combo"]["giant clam"] = main.burger_by_species["Krusty Combo"]["giant clam"] + file.burger_by_species["Krusty Combo"]["giant clam"];
-        main.burger_by_species["Krusty Combo"]["gray whale"] = main.burger_by_species["Krusty Combo"]["gray whale"] + file.burger_by_species["Krusty Combo"]["gray whale"];
-        main.burger_by_species["Krusty Combo"]["sea lion"] = main.burger_by_species["Krusty Combo"]["sea lion"] + file.burger_by_species["Krusty Combo"]["sea lion"];
+        main.burger_by_species["Krusty Combo"]["leatherback turtle"] += file.burger_by_species["Krusty Combo"]["leatherback turtle"];
+        main.burger_by_species["Krusty Combo"]["salmon"] += file.burger_by_species["Krusty Combo"]["salmon"];
+        main.burger_by_species["Krusty Combo"]["seahorse"] += file.burger_by_species["Krusty Combo"]["seahorse"];
+        main.burger_by_species["Krusty Combo"]["coral"] += file.burger_by_species["Krusty Combo"]["coral"];
+        main.burger_by_species["Krusty Combo"]["giant clam"] += file.burger_by_species["Krusty Combo"]["giant clam"];
+        main.burger_by_species["Krusty Combo"]["gray whale"] += file.burger_by_species["Krusty Combo"]["gray whale"];
+        main.burger_by_species["Krusty Combo"]["sea lion"] += file.burger_by_species["Krusty Combo"]["sea lion"];
 
-        main.burger_by_species["Krabby Pattie"]["leatherback turtle"] = main.burger_by_species["Krabby Pattie"]["leatherback turtle"] + file.burger_by_species["Krabby Pattie"]["leatherback turtle"];
-        main.burger_by_species["Krabby Pattie"]["salmon"] = main.burger_by_species["Krabby Pattie"]["salmon"] + file.burger_by_species["Krabby Pattie"]["salmon"];
-        main.burger_by_species["Krabby Pattie"]["seahorse"] = main.burger_by_species["Krabby Pattie"]["seahorse"] + file.burger_by_species["Krabby Pattie"]["seahorse"];
-        main.burger_by_species["Krabby Pattie"]["coral"] = main.burger_by_species["Krabby Pattie"]["coral"] + file.burger_by_species["Krabby Pattie"]["coral"];
-        main.burger_by_species["Krabby Pattie"]["giant clam"] = main.burger_by_species["Krabby Pattie"]["giant clam"] + file.burger_by_species["Krabby Pattie"]["giant clam"];
-        main.burger_by_species["Krabby Pattie"]["gray whale"] = main.burger_by_species["Krabby Pattie"]["gray whale"] + file.burger_by_species["Krabby Pattie"]["gray whale"];
-        main.burger_by_species["Krabby Pattie"]["sea lion"] = main.burger_by_species["Krabby Pattie"]["sea lion"] + file.burger_by_species["Krabby Pattie"]["sea lion"];
+        main.burger_by_species["Krabby Pattie"]["leatherback turtle"] += file.burger_by_species["Krabby Pattie"]["leatherback turtle"];
+        main.burger_by_species["Krabby Pattie"]["salmon"] += file.burger_by_species["Krabby Pattie"]["salmon"];
+        main.burger_by_species["Krabby Pattie"]["seahorse"] += file.burger_by_species["Krabby Pattie"]["seahorse"];
+        main.burger_by_species["Krabby Pattie"]["coral"] += file.burger_by_species["Krabby Pattie"]["coral"];
+        main.burger_by_species["Krabby Pattie"]["giant clam"] += file.burger_by_species["Krabby Pattie"]["giant clam"];
+        main.burger_by_species["Krabby Pattie"]["gray whale"] += file.burger_by_species["Krabby Pattie"]["gray whale"];
+        main.burger_by_species["Krabby Pattie"]["sea lion"] += file.burger_by_species["Krabby Pattie"]["sea lion"];
 
-        main.burger_by_species["Krusty Deluxe"]["leatherback turtle"] = main.burger_by_species["Krusty Deluxe"]["leatherback turtle"] + file.burger_by_species["Krusty Deluxe"]["leatherback turtle"];
-        main.burger_by_species["Krusty Deluxe"]["salmon"] = main.burger_by_species["Krusty Deluxe"]["salmon"] + file.burger_by_species["Krusty Deluxe"]["salmon"];
-        main.burger_by_species["Krusty Deluxe"]["seahorse"] = main.burger_by_species["Krusty Deluxe"]["seahorse"] + file.burger_by_species["Krusty Deluxe"]["seahorse"];
-        main.burger_by_species["Krusty Deluxe"]["coral"] = main.burger_by_species["Krusty Deluxe"]["coral"] + file.burger_by_species["Krusty Deluxe"]["coral"];
-        main.burger_by_species["Krusty Deluxe"]["giant clam"] = main.burger_by_species["Krusty Deluxe"]["giant clam"] + file.burger_by_species["Krusty Deluxe"]["giant clam"];
-        main.burger_by_species["Krusty Deluxe"]["gray whale"] = main.burger_by_species["Krusty Deluxe"]["gray whale"] + file.burger_by_species["Krusty Deluxe"]["gray whale"];
-        main.burger_by_species["Krusty Deluxe"]["sea lion"] = main.burger_by_species["Krusty Deluxe"]["sea lion"] + file.burger_by_species["Krusty Deluxe"]["sea lion"];
+        main.burger_by_species["Krusty Deluxe"]["leatherback turtle"] += file.burger_by_species["Krusty Deluxe"]["leatherback turtle"];
+        main.burger_by_species["Krusty Deluxe"]["salmon"] += file.burger_by_species["Krusty Deluxe"]["salmon"];
+        main.burger_by_species["Krusty Deluxe"]["seahorse"] += file.burger_by_species["Krusty Deluxe"]["seahorse"];
+        main.burger_by_species["Krusty Deluxe"]["coral"] += file.burger_by_species["Krusty Deluxe"]["coral"];
+        main.burger_by_species["Krusty Deluxe"]["giant clam"] += file.burger_by_species["Krusty Deluxe"]["giant clam"];
+        main.burger_by_species["Krusty Deluxe"]["gray whale"] += file.burger_by_species["Krusty Deluxe"]["gray whale"];
+        main.burger_by_species["Krusty Deluxe"]["sea lion"] += file.burger_by_species["Krusty Deluxe"]["sea lion"];
 
         obj = main.sales;
-        console.log(obj)
-        console.log(main);
-
+        
         window.localStorage.setItem("data", JSON.stringify(obj));
         constructChartComponent(obj);
     }
