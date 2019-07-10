@@ -122,7 +122,7 @@ function loadSalesByBurgerDate(date, burger_type) {
     })
     if(filtered.length == 0) {
         alert('No item found');
-        refresh();
+        refreshInput();
     } else {
         var arr = [];
         for(var i = 0; i < customerList.length; i++) {
@@ -169,7 +169,7 @@ function loadSalesByCustomerDate(date, customer) {
 
     if(filtered.length == 0) {
         alert('No item found');
-        refresh();
+        refreshInput();
     } else {
         var arr = [];
         for(var i = 0; i < burgerList.length; i++) {
@@ -233,6 +233,18 @@ function updateSalesByDate(name, alldata) {
     }); 
 }
 
+function eventChecker(e) {
+    if(e.id == 'sales') {
+        $("#specific_input").val('');
+        $("#customer").val('all');
+        $("#burger").val('all');
+        loadAllSalesByDate($("#input").val());
+    } else if(e.id == 'kc') {
+        $("#input").val('');
+        filterData($("#specific_input").val(), $("#burger").val(), $("#customer").val());
+    }
+}
+
 function loadAllSalesByDate(input) {
     var new_date = new Date(input);
     var aa = new_date.getFullYear();
@@ -246,7 +258,7 @@ function loadAllSalesByDate(input) {
         })
         if(filtered.length == 0) {
             alert('No item found');
-            refresh();
+            refreshInput();
         } else {
             var arr = [];
             var color = randomColorFilter(customerList.length);
@@ -283,17 +295,7 @@ function loadAllSalesByDate(input) {
             $("#particles-js").css("z-index","-1")
 
             updateSalesByDate("Burger Sales in " + month_list[bb - 1] + " " + cc + ", " + aa, objects);        
-            if($("#specific_input").val() != '') {
-                if($("#input").val() != '') {
-                    if($("#customer").val() != 'all' || $("#burger").val() != 'all') {
-                        $("#specific_input").val('');
-                        $("#customer").val('all');
-                        $("#burger").val('all');
-                    } else {
-                        $("#input").val('');
-                    }
-                }
-            }
+            loadTimePerDayAll(input);
         }
     }
 }
@@ -394,7 +396,7 @@ function loadTimePerDayBurger(date, burger_type) {
     
     if(filtered.length == 0) {
         alert('No item found');
-        refresh();
+        refreshInput();
     } else {
         var arr = [], time_arr = [];
         for(var i = 0; i < filtered.length; i++) {
@@ -426,7 +428,7 @@ function loadTimePerDayCustomer(date, customer) {
     
     if(filtered.length == 0) {
         alert('No item found');
-        refresh();
+        refreshInput();
     } else {
         var arr = [], time_arr = [];
         for(var i = 0; i < filtered.length; i++) {
@@ -458,7 +460,7 @@ function loadTimePerDayAll(date) {
     
     if(filtered.length == 0) {
         alert('No item found');
-        refresh();
+        refreshInput();
     } else {
         var arr = [], time_arr = [];
         for(var i = 0; i < filtered.length; i++) {
@@ -566,7 +568,7 @@ function loadSalesByDateBurgerCustomer(date, burger_type, customer) {
 
     if(filtered.length == 0) {
         alert('No item found');
-        refresh();
+        refreshInput();
     } else {
         for(var i = 0; i < filtered.length; i++) {
             var time = filtered[i].datetime.substring(11, 14) + "00";
@@ -728,6 +730,8 @@ function customerPerDay() {
     $(".scroll").css("overflow-y","scroll")
     $("#input").val('');
     $("#specific_input").val('');
+    $("#customer").val('all');
+    $("#burger").val('all');
 }
 
 function filterData(date, burger, customer) {
@@ -752,7 +756,6 @@ function filterData(date, burger, customer) {
     } else {
         if(burger == 'all' && customer == 'all') {
             loadAllSalesByDate(date);
-            loadTimePerDayAll(date);
         } else {
             if(burger == 'all') {
                 loadSalesByCustomerDate(date, customer);

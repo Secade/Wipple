@@ -89,7 +89,7 @@
                 </p>
 
                 <input type="date" placeholder="Input date" id="input">
-                <button id="sales" type="button" onclick="loadAllSalesByDate(document.getElementById('input').value)">
+                <button id="sales" type="button" onclick="eventChecker(this)">
                     <img src="../search.png" id="searchButton"><br>
                 </button>
             </div>
@@ -100,11 +100,11 @@
 
                 <input type="date" placeholder="Input date" id="specific_input">
                 <button id="kc" type="button"
-                    onclick="filterData(document.getElementById('specific_input').value, document.getElementById('burger').value, document.getElementById('customer').value)">
+                    onclick="eventChecker(this)">
                     <img src="../search.png" id="searchButton">
                 </button>
                 <select id="customer">
-                    <option value="all">All</option>
+                    <option value="all">All Species</option>
                     <option value="leatherback turtle">Leatherback Turtle</option>
                     <option value="salmon">Salmon</option>
                     <option value="seahorse">Seahorse</option>
@@ -114,7 +114,7 @@
                     <option value="sea lion">Sea Lion</option>
                 </select>
                 <select id="burger">
-                    <option value="all">All</option>
+                    <option value="all">All Burger</option>
                     <option value="Krabby Pattie">Krabby Pattie</option>
                     <option value="Krusty Deluxe">Krusty Deluxe</option>
                     <option value="Krusty Combo">Krusty Combo</option>
