@@ -21,6 +21,7 @@
 
 #filter{
     margin-left: 10px;
+    margin-right: 5px;
     height: 20px;
 }
 
@@ -40,7 +41,7 @@ th {
 }
 
 td{
-    width: 200px;
+    width: auto;
 }
 
 #customer, #burger{
@@ -70,8 +71,8 @@ td{
     top: 100%;
     left: 70%;
         transform: translate(-70%);
-    width: 700px;
-    height:900px;
+    width: 410px;
+    height: 600px;
     margin: 20px;
     position: relative;
     display: block;
@@ -336,6 +337,18 @@ cursor: pointer;
     transform: translate(-50%);
 }
 
+#filterText{
+    width: 40px;
+    height: auto;
+    color: white;
+    font-family: 'Raleway';
+    font-size: 14px;
+    padding: 0px;
+    margin: 0px;
+    position: relative;
+    display: inline;
+}
+
 #allText{
     width: fit-content;
     height: auto;
@@ -409,8 +422,6 @@ cursor: pointer;
         padding: 5%;
     }
 
-    
-
 @media all and (max-width:1400px){
     .SideBar{
         display: block;
@@ -475,4 +486,10 @@ cursor: pointer;
         margin-bottom: 5px;
     }
 }
+}
+
+@media all and (max-width:800px){
+    .scroll{
+        top: 60%;
+    }
 }
