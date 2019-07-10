@@ -23,7 +23,6 @@ $(document).ready(function(){
     })
 
     $(".loading").css("visibility","hidden")
-
 });
 
 function start(something) {
@@ -43,8 +42,6 @@ function init() {
     $("#stats").css({
         'visibility':'hidden'
     });
-    var test1 = document.getElementById('showData');
-    test1.hidden = true;
     $(".scroll").css("overflow-y"," hidden");
 }
 
@@ -123,18 +120,24 @@ function loadSalesByBurgerDate(date, burger_type) {
     var filtered = obj.filter(function(item) {
         return item.datetime.substring(0, 10) == date && item.burger == burger_type;
     })
-    var arr = [];
-    for(var i = 0; i < customerList.length; i++) {
-      arr.push(0);
+    if(filtered.length == 0) {
+        alert('No item found');
+        refresh();
+    } else {
+        var arr = [];
+        for(var i = 0; i < customerList.length; i++) {
+        arr.push(0);
+        }
+        
+        for(var i = 0; i < filtered.length; i++) {
+            var index = customerList.indexOf(filtered[i].species);
+            arr[index] += 1;
+        }
+        temp_data = arr;
+        refresh();
+        updateChartSales(burger_type + " Sales in " + month_list[bb - 1] + " " + cc + ", " + aa, arr.length, customerList);
+        loadTimePerDayBurger(date, burger);
     }
-    
-    for(var i = 0; i < filtered.length; i++) {
-        var index = customerList.indexOf(filtered[i].species);
-        arr[index] += 1;
-    }
-    temp_data = arr;
-    refresh();
-    updateChartSales(burger_type + " Sales in " + month_list[bb - 1] + " " + cc + ", " + aa, arr.length, customerList);
 }
 
 function loadSalesByCustomer(customer) {
@@ -164,123 +167,24 @@ function loadSalesByCustomerDate(date, customer) {
         return item.datetime.substring(0, 10) == date && item.species == customer;
     })
 
-    var arr = [];
-    for(var i = 0; i < burgerList.length; i++) {
-      arr.push(0);
-    }
-    
-    for(var i = 0; i < filtered.length; i++) {
-        var index = burgerList.indexOf(filtered[i].burger);
-        arr[index] += 1; 
-    }
-    temp_data = arr;
-    refresh();
-    updateChartSales("Burger Order by " + customer + " in " + month_list[bb - 1] + " " + cc + ", " + aa, burgerList.length, burgerList);
-}
-
-function loadAllSalesByDate(input) {
-
-    var new_date = new Date(input);
-    var aa = new_date.getFullYear();
-    var bb = new_date.getMonth() + 1;
-    var cc = new_date.getDate();
-    if(input == '') {
-        alert('Please input a valid date');
-    } else {
-        var filtered = obj.filter(function(item) {
-            return item.datetime.substring(0, 10) == input;
-        })
-        var arr = [];
-        var color = randomColorFilter(customerList.length);
-        for(var i = 0; i < customerList.length; i++) {
-            var curr1 = filtered.filter(function(item1) {
-                return item1.species == customerList[i];
-            });
-            var chartdata = [];
-            for(var j = 0; j < burgerList.length; j++) {
-                var curr2 = curr1.filter(function(item2) {
-                    return item2.burger == burgerList[j];
-                })
-                chartdata.push(curr2.length);
-            }
-            arr.push(chartdata);
-        }    
-        var objects = [];
-        for(var i = 0; i < customerList.length; i++) {
-            objects.push(generateObjects(customerList[i], arr[i], color[i]));
-        }
-
+    if(filtered.length == 0) {
+        alert('No item found');
         refresh();
-        var a = arr[0][0] + arr[1][0] + arr[2][0] + arr[3][0] + arr[4][0] + arr[5][0] + arr[6][0];
-        var b = arr[0][2] + arr[1][2] + arr[2][2] + arr[3][2] + arr[4][2] + arr[5][2] + arr[6][2];
-        var c = arr[0][1] + arr[1][1] + arr[2][1] + arr[3][1] + arr[4][1] + arr[5][1] + arr[6][1];
-        var d = arr[3][0] + arr[3][1] + arr[3][2];
-        var e = arr[4][0] + arr[4][1] + arr[4][2];
-        var f = arr[6][0] + arr[6][1] + arr[6][2];
-        var g = arr[0][0] + arr[0][1] + arr[0][2];
-        var h = arr[1][0] + arr[1][1] + arr[1][2];
-        var i = arr[2][0] + arr[2][1] + arr[2][2];
-        var j = arr[5][0] + arr[5][1] + arr[5][2];
-        showCount(a, b, c, d, e, f, g, h, i, j);
-        $("#particles-js").css("z-index","-1")
-
-        updateSalesByDate("Burger Sales in " + month_list[bb - 1] + " " + cc + ", " + aa, objects);        
-        if($("#specific_input").val() != '') {
-            if($("#input").val() != '') {
-                if($("#customer").val() != 'all' || $("#burger").val() != 'all') {
-                    $("#specific_input").val('');
-                    $("#customer").val('all');
-                    $("#burger").val('all');
-                } else {
-                    $("#input").val('');
-                }
-            }
+    } else {
+        var arr = [];
+        for(var i = 0; i < burgerList.length; i++) {
+        arr.push(0);
         }
-    }
-}
-
-function loadAllSales() {
-    var arr = [];
-    var color = randomColorFilter(customerList.length);
-    for(var i = 0; i < customerList.length; i++) {
-        var curr1 = obj.filter(function(item1) {
-            return item1.species == customerList[i];
-        });
-        var chartdata = [];
-        for(var j = 0; j < burgerList.length; j++) {
-            var curr2 = curr1.filter(function(item2) {
-                return item2.burger == burgerList[j];
-            })
-            chartdata.push(curr2.length);
+        
+        for(var i = 0; i < filtered.length; i++) {
+            var index = burgerList.indexOf(filtered[i].burger);
+            arr[index] += 1; 
         }
-        arr.push(chartdata);
-    }    
-    var objects = [];
-    for(var m = 0; m < customerList.length; m++) {
-        objects.push(generateObjects(customerList[m], arr[m], color[m]));
+        temp_data = arr;
+        refresh();
+        updateChartSales("Burger Order by " + customer + " in " + month_list[bb - 1] + " " + cc + ", " + aa, burgerList.length, burgerList);
+        loadTimePerDayCustomer(date, customer);
     }
-    refresh();
-    var a = arr[0][0] + arr[1][0] + arr[2][0] + arr[3][0] + arr[4][0] + arr[5][0] + arr[6][0];
-    var b = arr[0][2] + arr[1][2] + arr[2][2] + arr[3][2] + arr[4][2] + arr[5][2] + arr[6][2];
-    var c = arr[0][1] + arr[1][1] + arr[2][1] + arr[3][1] + arr[4][1] + arr[5][1] + arr[6][1];
-    var d = arr[3][0] + arr[3][1] + arr[3][2];
-    var e = arr[4][0] + arr[4][1] + arr[4][2];
-    var f = arr[6][0] + arr[6][1] + arr[6][2];
-    var g = arr[0][0] + arr[0][1] + arr[0][2];
-    var h = arr[1][0] + arr[1][1] + arr[1][2];
-    var i = arr[2][0] + arr[2][1] + arr[2][2];
-    var j = arr[5][0] + arr[5][1] + arr[5][2];
-    showCount(a, b, c, d, e, f, g, h, i, j);
-    updateSalesByDate("Burger Sales" , objects);
-}
-
-function generateObjects(name, value, color) {
-    var obj = new Object();
-    obj.label = name;
-    obj.data = value;
-    obj.backgroundColor = color;
-    obj.borderWidth = 1;
-    return obj;
 }
 
 function updateSalesByDate(name, alldata) {
@@ -329,86 +233,104 @@ function updateSalesByDate(name, alldata) {
     }); 
 }
 
-function loadTimePerDayBurger(date, burger_type) {
-    var new_date = new Date(date);
+function loadAllSalesByDate(input) {
+    var new_date = new Date(input);
     var aa = new_date.getFullYear();
     var bb = new_date.getMonth() + 1;
     var cc = new_date.getDate();
-    
-    var filtered = obj.filter(function(item) {
-        return item.datetime.substring(0, 10) == date && item.burger == burger_type;
-    })
-    var arr = [], time_arr = [];
-
-    for(var i = 0; i < filtered.length; i++) {
-        var time = filtered[i].datetime.substring(11, 14) + "00";
-        if(time_arr.includes(time)) {
-            var index = time_arr.indexOf(time);
-            arr[index] += 1;
+    if(input == '') {
+        alert('Please input a valid date');
+    } else {
+        var filtered = obj.filter(function(item) {
+            return item.datetime.substring(0, 10) == input;
+        })
+        if(filtered.length == 0) {
+            alert('No item found');
+            refresh();
         } else {
-            time_arr.push(time);
-            var num = 1;
-            arr.push(num);
+            var arr = [];
+            var color = randomColorFilter(customerList.length);
+            for(var i = 0; i < customerList.length; i++) {
+                var curr1 = filtered.filter(function(item1) {
+                    return item1.species == customerList[i];
+                });
+                var chartdata = [];
+                for(var j = 0; j < burgerList.length; j++) {
+                    var curr2 = curr1.filter(function(item2) {
+                        return item2.burger == burgerList[j];
+                    })
+                    chartdata.push(curr2.length);
+                }
+                arr.push(chartdata);
+            }    
+            var objects = [];
+            for(var i = 0; i < customerList.length; i++) {
+                objects.push(generateObjects(customerList[i], arr[i], color[i]));
+            }
+
+            refresh();
+            var a = arr[0][0] + arr[1][0] + arr[2][0] + arr[3][0] + arr[4][0] + arr[5][0] + arr[6][0];
+            var b = arr[0][2] + arr[1][2] + arr[2][2] + arr[3][2] + arr[4][2] + arr[5][2] + arr[6][2];
+            var c = arr[0][1] + arr[1][1] + arr[2][1] + arr[3][1] + arr[4][1] + arr[5][1] + arr[6][1];
+            var d = arr[3][0] + arr[3][1] + arr[3][2];
+            var e = arr[4][0] + arr[4][1] + arr[4][2];
+            var f = arr[6][0] + arr[6][1] + arr[6][2];
+            var g = arr[0][0] + arr[0][1] + arr[0][2];
+            var h = arr[1][0] + arr[1][1] + arr[1][2];
+            var i = arr[2][0] + arr[2][1] + arr[2][2];
+            var j = arr[5][0] + arr[5][1] + arr[5][2];
+            showCount(a, b, c, d, e, f, g, h, i, j);
+            $("#particles-js").css("z-index","-1")
+
+            updateSalesByDate("Burger Sales in " + month_list[bb - 1] + " " + cc + ", " + aa, objects);        
+            if($("#specific_input").val() != '') {
+                if($("#input").val() != '') {
+                    if($("#customer").val() != 'all' || $("#burger").val() != 'all') {
+                        $("#specific_input").val('');
+                        $("#customer").val('all');
+                        $("#burger").val('all');
+                    } else {
+                        $("#input").val('');
+                    }
+                }
+            }
         }
     }
-    temp = time_arr;
-    temp_data = arr;
-    updateTimePerDay("Customers per hour in " + month_list[bb - 1] + " " + cc + ", " + aa, time_arr.length);
 }
 
-function loadTimePerDayCustomer(date, customer) {
-    var new_date = new Date(date);
-    var aa = new_date.getFullYear();
-    var bb = new_date.getMonth() + 1;
-    var cc = new_date.getDate();
-
-    var filtered = obj.filter(function(item) {
-        return item.datetime.substring(0, 10) == date && item.species == customer;
-    })
-    var arr = [], time_arr = [];
-
-    for(var i = 0; i < filtered.length; i++) {
-        var time = filtered[i].datetime.substring(11, 14) + "00";
-        if(time_arr.includes(time)) {
-            var index = time_arr.indexOf(time);
-            arr[index] += 1;
-        } else {
-            time_arr.push(time);
-            var num = 1;
-            arr.push(num);
+function loadAllSales() {
+    var arr = [];
+    var color = randomColorFilter(customerList.length);
+    for(var i = 0; i < customerList.length; i++) {
+        var curr1 = obj.filter(function(item1) {
+            return item1.species == customerList[i];
+        });
+        var chartdata = [];
+        for(var j = 0; j < burgerList.length; j++) {
+            var curr2 = curr1.filter(function(item2) {
+                return item2.burger == burgerList[j];
+            })
+            chartdata.push(curr2.length);
         }
+        arr.push(chartdata);
+    }    
+    var objects = [];
+    for(var m = 0; m < customerList.length; m++) {
+        objects.push(generateObjects(customerList[m], arr[m], color[m]));
     }
-    temp = time_arr;
-    temp_data = arr;
-    updateTimePerDay("Customers per hour in " + month_list[bb - 1] + " " + cc + ", " + aa, time_arr.length);
-}
-
-function loadTimePerDayAll(date) {
-    var new_date = new Date(date);
-    var aa = new_date.getFullYear();
-    var bb = new_date.getMonth() + 1;
-    var cc = new_date.getDate();
-
-    var filtered = obj.filter(function(item) {
-        return item.datetime.substring(0, 10) == date;
-    })
-    var arr = [], time_arr = [];
-
-    for(var i = 0; i < filtered.length; i++) {
-        var time = filtered[i].datetime.substring(11, 14) + "00";
-
-        if(time_arr.includes(time)) {
-            var index = time_arr.indexOf(time);
-            arr[index] += 1;
-        } else {
-            time_arr.push(time);
-            var num = 1;
-            arr.push(num);
-        }
-    }
-    temp = time_arr;
-    temp_data = arr;
-    updateTimePerDay("Customers per hour in " + month_list[bb - 1] + " " + cc + ", " + aa, time_arr.length);
+    refresh();
+    var a = arr[0][0] + arr[1][0] + arr[2][0] + arr[3][0] + arr[4][0] + arr[5][0] + arr[6][0];
+    var b = arr[0][2] + arr[1][2] + arr[2][2] + arr[3][2] + arr[4][2] + arr[5][2] + arr[6][2];
+    var c = arr[0][1] + arr[1][1] + arr[2][1] + arr[3][1] + arr[4][1] + arr[5][1] + arr[6][1];
+    var d = arr[3][0] + arr[3][1] + arr[3][2];
+    var e = arr[4][0] + arr[4][1] + arr[4][2];
+    var f = arr[6][0] + arr[6][1] + arr[6][2];
+    var g = arr[0][0] + arr[0][1] + arr[0][2];
+    var h = arr[1][0] + arr[1][1] + arr[1][2];
+    var i = arr[2][0] + arr[2][1] + arr[2][2];
+    var j = arr[5][0] + arr[5][1] + arr[5][2];
+    showCount(a, b, c, d, e, f, g, h, i, j);
+    updateSalesByDate("Burger Sales" , objects);
 }
 
 function updateTimePerDay(name, num) {
@@ -460,74 +382,101 @@ function updateTimePerDay(name, num) {
     });
 }
 
-function loadSalesByBurgerCustomer(burger_type, customer) {
-    var arr = [], date_arr = [];
-    var filtered = obj.filter(function(item) {
-        return item.burger == burger_type && item.species == customer;
-    })
-     
-    for(var i = 0; i < filtered.length; i++) {
-        var date = filtered[i].datetime.substring(0, 10);
-
-        if(date_arr.includes(date)) {
-            var index = date_arr.indexOf(date);
-            arr[index] += 1;
-        } else {
-            date_arr.push(date);
-            var num = 1;
-            arr.push(num);
-        }
-    }
-    temp = date_arr;
-    temp_data = arr;
-    refresh();
-    updateSalesByComplete(burger_type + " orders by " + customer, arr.length);
-    createSalesPerDay(burger_type, customer);
-}
-
-function loadSalesByDateBurgerCustomer(date, burger_type, customer) {
+function loadTimePerDayBurger(date, burger_type) {
     var new_date = new Date(date);
     var aa = new_date.getFullYear();
     var bb = new_date.getMonth() + 1;
     var cc = new_date.getDate();
-    var arr = [], time_arr = [];
+    
     var filtered = obj.filter(function(item) {
-        return item.datetime.substring(0, 10) == date && item.burger == burger_type && item.species == customer;
+        return item.datetime.substring(0, 10) == date && item.burger == burger_type;
     })
-
-    for(var i = 0; i < filtered.length; i++) {
-        var time = filtered[i].datetime.substring(11, 14) + "00";
-
-        if(time_arr.includes(time)) {
-            var index = time_arr.indexOf(time);
-            arr[index] += 1;
-        } else {
-            time_arr.push(time);
-            var num = 1;
-            arr.push(num);
+    
+    if(filtered.length == 0) {
+        alert('No item found');
+        refresh();
+    } else {
+        var arr = [], time_arr = [];
+        for(var i = 0; i < filtered.length; i++) {
+            var time = filtered[i].datetime.substring(11, 14) + "00";
+            if(time_arr.includes(time)) {
+                var index = time_arr.indexOf(time);
+                arr[index] += 1;
+            } else {
+                time_arr.push(time);
+                var num = 1;
+                arr.push(num);
+            }
         }
+        temp = time_arr;
+        temp_data = arr;
+        updateTimePerDay("Customers per hour in " + month_list[bb - 1] + " " + cc + ", " + aa, time_arr.length);
     }
-    temp = time_arr;
-    temp_data = arr;
-    refresh();
-    updateChartSales(burger_type + " orders by " + customer + " in " + month_list[bb - 1] + " " + cc + ", " + aa, time_arr.length, time_arr);
 }
 
-function randomColorFilter(num) {
-    var arr = [];
-    var x = 0;
-    while(x < num) {
-        var letters = '0123456789ABCDEF';
-        var color = '#';
-        for (var i = 0; i < 6; i++) {
-            color += letters[Math.floor(Math.random() * 16)];
+function loadTimePerDayCustomer(date, customer) {
+    var new_date = new Date(date);
+    var aa = new_date.getFullYear();
+    var bb = new_date.getMonth() + 1;
+    var cc = new_date.getDate();
+
+    var filtered = obj.filter(function(item) {
+        return item.datetime.substring(0, 10) == date && item.species == customer;
+    })
+    
+    if(filtered.length == 0) {
+        alert('No item found');
+        refresh();
+    } else {
+        var arr = [], time_arr = [];
+        for(var i = 0; i < filtered.length; i++) {
+            var time = filtered[i].datetime.substring(11, 14) + "00";
+            if(time_arr.includes(time)) {
+                var index = time_arr.indexOf(time);
+                arr[index] += 1;
+            } else {
+                time_arr.push(time);
+                var num = 1;
+                arr.push(num);
+            }
         }
-        if(!arr.includes(color) && color != '#282b30') {
-            arr.push(color);
-            x++;
-        }
+        temp = time_arr;
+        temp_data = arr;
+        updateTimePerDay("Customers per hour in " + month_list[bb - 1] + " " + cc + ", " + aa, time_arr.length);
     }
-    return arr;
+}
+
+function loadTimePerDayAll(date) {
+    var new_date = new Date(date);
+    var aa = new_date.getFullYear();
+    var bb = new_date.getMonth() + 1;
+    var cc = new_date.getDate();
+
+    var filtered = obj.filter(function(item) {
+        return item.datetime.substring(0, 10) == date;
+    })
+    
+    if(filtered.length == 0) {
+        alert('No item found');
+        refresh();
+    } else {
+        var arr = [], time_arr = [];
+        for(var i = 0; i < filtered.length; i++) {
+            var time = filtered[i].datetime.substring(11, 14) + "00";
+
+            if(time_arr.includes(time)) {
+                var index = time_arr.indexOf(time);
+                arr[index] += 1;
+            } else {
+                time_arr.push(time);
+                var num = 1;
+                arr.push(num);
+            }
+        }
+        temp = time_arr;
+        temp_data = arr;
+        updateTimePerDay("Customers per hour in " + month_list[bb - 1] + " " + cc + ", " + aa, time_arr.length);
+    }
 }
 
 function updateSalesByComplete(name, num) {
@@ -580,100 +529,62 @@ function updateSalesByComplete(name, num) {
     });
 }
 
-function constructChartComponent(object) {
-    for(var i = 0; i < object.length; i++) {
-        var temp_burger = object[i].burger;
-        var temp_customer = object[i].species;
+function loadSalesByBurgerCustomer(burger_type, customer) {
+    var arr = [], date_arr = [];
+    var filtered = obj.filter(function(item) {
+        return item.burger == burger_type && item.species == customer;
+    })
+     
+    for(var i = 0; i < filtered.length; i++) {
+        var date = filtered[i].datetime.substring(0, 10);
 
-        if(!burgerList.includes(temp_burger)) {
-            burgerList.push(temp_burger);
-        }
-        if(!customerList.includes(temp_customer)) {
-            customerList.push(temp_customer);
+        if(date_arr.includes(date)) {
+            var index = date_arr.indexOf(date);
+            arr[index] += 1;
+        } else {
+            date_arr.push(date);
+            var num = 1;
+            arr.push(num);
         }
     }
-    burgerList.sort();
-    customerList.sort();
-}
-
-function viewAllData() {
-    $("#particles-js").css("z-index","-1")
-
-    loadAllSales();
-    createAllSalesTable();
-    $("#input").val('');
-    $("#specific_input").val('');
-    $("#customer").val('all');
-    $("#burger").val('all');
-}
-
-function openFilter(){
-    if(filterOpened){
-        $(".loading").css("visibility","hidden")
-        filterOpened=false
-    }else{
-        $(".loading").css("visibility","visible")
-        filterOpened=true
-    }
-}
-
-function filterData(date, burger, customer) {
-
+    temp = date_arr;
+    temp_data = arr;
     refresh();
-
-    if(date == '') {
-        if(burger == 'all' && customer == 'all') {
-            alert('Please input a valid date');
-            $("#particles-js").css("z-index","0")
-
-        } else {
-            if(burger == 'all') {
-                loadSalesByCustomer(customer);
-            } else if(customer == 'all') {
-                loadSalesByBurger(burger);
-            } else {
-                loadSalesByBurgerCustomer(burger, customer);
-            }
-        }
-        $("#particles-js").css("z-index","-1");
-
-    } else {
-        if(burger == 'all' && customer == 'all') {
-            loadAllSalesByDate(date);
-            loadTimePerDayAll(date);
-        } else {
-            if(burger == 'all') {
-                loadSalesByCustomerDate(date, customer);
-                loadTimePerDayCustomer(date, customer);
-            } else if(customer == 'all') {
-                loadSalesByBurgerDate(date, burger);
-                loadTimePerDayBurger(date, burger);
-            } else {
-                loadSalesByDateBurgerCustomer(date, burger, customer);
-            }
-        }
-        $("#particles-js").css("z-index","-1");
-    }
-    $("#input").val('');
+    updateSalesByComplete(burger_type + " orders by " + customer, arr.length);
+    createSalesPerDay(burger_type, customer);
 }
 
-function showCount(a, b, c, d, e, f, g, h, i, j) {
-    document.getElementById('total').innerHTML = a + b + c;
-    document.getElementById('kpattie').innerHTML = a;
-    document.getElementById('kdeluxe').innerHTML = b;
-    document.getElementById('kcombo').innerHTML = c;
-    document.getElementById('total_customer').innerHTML = d + e + f + g + h + i + j;
-    document.getElementById('lt').innerHTML = d;
-    document.getElementById('sal').innerHTML = e;
-    document.getElementById('sh').innerHTML = f;
-    document.getElementById('cor').innerHTML = g;
-    document.getElementById('gc').innerHTML = h;
-    document.getElementById('gw').innerHTML = i;
-    document.getElementById('sl').innerHTML = j;
+function loadSalesByDateBurgerCustomer(date, burger_type, customer) {
+    var new_date = new Date(date);
+    var aa = new_date.getFullYear();
+    var bb = new_date.getMonth() + 1;
+    var cc = new_date.getDate();
+    var arr = [], time_arr = [];
+    var filtered = obj.filter(function(item) {
+        return item.datetime.substring(0, 10) == date && item.burger == burger_type && item.species == customer;
+    })
 
-    $("#stats").css({
-        'visibility':'visible'
-    });
+    if(filtered.length == 0) {
+        alert('No item found');
+        refresh();
+    } else {
+        for(var i = 0; i < filtered.length; i++) {
+            var time = filtered[i].datetime.substring(11, 14) + "00";
+    
+            if(time_arr.includes(time)) {
+                var index = time_arr.indexOf(time);
+                arr[index] += 1;
+            } else {
+                time_arr.push(time);
+                var num = 1;
+                arr.push(num);
+            }
+        }
+        temp = time_arr;
+        temp_data = arr;
+        refresh();
+        updateChartSales(burger_type + " orders by " + customer + " in " + month_list[bb - 1] + " " + cc + ", " + aa, time_arr.length, time_arr);
+    }
 }
 
 function createAllSalesTable() {
@@ -817,6 +728,125 @@ function customerPerDay() {
     $(".scroll").css("overflow-y","scroll")
     $("#input").val('');
     $("#specific_input").val('');
+}
+
+function filterData(date, burger, customer) {
+    refresh();
+
+    if(date == '') {
+        if(burger == 'all' && customer == 'all') {
+            alert('Please input a valid date');
+            $("#particles-js").css("z-index","0")
+
+        } else {
+            if(burger == 'all') {
+                loadSalesByCustomer(customer);
+            } else if(customer == 'all') {
+                loadSalesByBurger(burger);
+            } else {
+                loadSalesByBurgerCustomer(burger, customer);
+            }
+        }
+        $("#particles-js").css("z-index","-1");
+
+    } else {
+        if(burger == 'all' && customer == 'all') {
+            loadAllSalesByDate(date);
+            loadTimePerDayAll(date);
+        } else {
+            if(burger == 'all') {
+                loadSalesByCustomerDate(date, customer);
+            } else if(customer == 'all') {
+                loadSalesByBurgerDate(date, burger);
+            } else {
+                loadSalesByDateBurgerCustomer(date, burger, customer);
+            }
+        }
+        $("#particles-js").css("z-index","-1");
+    }
+    $("#input").val('');
+}
+
+function viewAllData() {
+    $("#particles-js").css("z-index","-1")
+
+    loadAllSales();
+    createAllSalesTable();
+    $("#input").val('');
+    $("#specific_input").val('');
+    $("#customer").val('all');
+    $("#burger").val('all');
+}
+
+function constructChartComponent(object) {
+    for(var i = 0; i < object.length; i++) {
+        var temp_burger = object[i].burger;
+        var temp_customer = object[i].species;
+
+        if(!burgerList.includes(temp_burger)) {
+            burgerList.push(temp_burger);
+        }
+        if(!customerList.includes(temp_customer)) {
+            customerList.push(temp_customer);
+        }
+    }
+    burgerList.sort();
+    customerList.sort();
+}
+
+function generateObjects(name, value, color) {
+    var obj = new Object();
+    obj.label = name;
+    obj.data = value;
+    obj.backgroundColor = color;
+    obj.borderWidth = 1;
+    return obj;
+}
+
+function showCount(a, b, c, d, e, f, g, h, i, j) {
+    document.getElementById('total').innerHTML = a + b + c;
+    document.getElementById('kpattie').innerHTML = a;
+    document.getElementById('kdeluxe').innerHTML = b;
+    document.getElementById('kcombo').innerHTML = c;
+    document.getElementById('total_customer').innerHTML = d + e + f + g + h + i + j;
+    document.getElementById('lt').innerHTML = d;
+    document.getElementById('sal').innerHTML = e;
+    document.getElementById('sh').innerHTML = f;
+    document.getElementById('cor').innerHTML = g;
+    document.getElementById('gc').innerHTML = h;
+    document.getElementById('gw').innerHTML = i;
+    document.getElementById('sl').innerHTML = j;
+
+    $("#stats").css({
+        'visibility':'visible'
+    });
+}
+
+function randomColorFilter(num) {
+    var arr = [];
+    var x = 0;
+    while(x < num) {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        if(!arr.includes(color) && color != '#282b30') {
+            arr.push(color);
+            x++;
+        }
+    }
+    return arr;
+}
+
+function openFilter(){
+    if(filterOpened){
+        $(".loading").css("visibility","hidden")
+        filterOpened=false
+    }else{
+        $(".loading").css("visibility","visible")
+        filterOpened=true
+    }
 }
 
 function refresh() {
