@@ -126,7 +126,7 @@ function loadSalesByBurgerDate(date, burger_type) {
     } else {
         var arr = [];
         for(var i = 0; i < customerList.length; i++) {
-        arr.push(0);
+            arr.push(0);
         }
         
         for(var i = 0; i < filtered.length; i++) {
@@ -705,6 +705,8 @@ function customerPerDay() {
     }
 refresh();
 
+
+    refresh();
 
     temp = time;
     temp_data = number;
