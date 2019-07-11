@@ -126,7 +126,7 @@ function loadSalesByBurgerDate(date, burger_type) {
     } else {
         var arr = [];
         for(var i = 0; i < customerList.length; i++) {
-        arr.push(0);
+            arr.push(0);
         }
         
         for(var i = 0; i < filtered.length; i++) {
@@ -136,7 +136,7 @@ function loadSalesByBurgerDate(date, burger_type) {
         temp_data = arr;
         refresh();
         updateChartSales(burger_type + " Sales in " + month_list[bb - 1] + " " + cc + ", " + aa, arr.length, customerList);
-        loadTimePerDayBurger(date, burger);
+        loadTimePerDayBurger(date, burger_type);
     }
 }
 
