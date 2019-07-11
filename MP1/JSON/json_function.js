@@ -136,7 +136,7 @@ function loadSalesByBurgerDate(date, burger_type) {
         temp_data = arr;
         refresh();
         updateChartSales(burger_type + " Sales in " + month_list[bb - 1] + " " + cc + ", " + aa, arr.length, customerList);
-        loadTimePerDayBurger(date, burger);
+        loadTimePerDayBurger(date, burger_type);
     }
 }
 
@@ -703,6 +703,8 @@ function customerPerDay() {
             number[index] += 1;
         }
     }
+refresh();
+
 
     temp = time;
     temp_data = number;
@@ -877,6 +879,10 @@ function refresh() {
     document.getElementById('gc').innerHTML = '';
     document.getElementById('gw').innerHTML = '';
     document.getElementById('sl').innerHTML = '';
+
+    var tt = document.getElementById("showData");
+
+    tt.hidden=true;
 
     $("#stats").css({
         'visibility':'hidden'
