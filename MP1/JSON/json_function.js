@@ -704,6 +704,8 @@ function customerPerDay() {
         }
     }
 
+    refresh();
+
     temp = time;
     temp_data = number;
     updateSalesByComplete("Number of Customers per day", time.length);
@@ -878,6 +880,8 @@ function refresh() {
     document.getElementById('gw').innerHTML = '';
     document.getElementById('sl').innerHTML = '';
 
+    var tt = document.getElementById("showData");
+    tt.hidden = true;
     $("#stats").css({
         'visibility':'hidden'
     });
